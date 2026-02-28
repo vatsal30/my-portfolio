@@ -4,26 +4,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
+import { MediaWidget } from "./MediaWidget";
 
 const navItems = [
     { path: "/", label: "Home" },
     { path: "/projects", label: "Projects" },
-    { path: "/notes", label: "Notes" },
     { path: "/interests", label: "Interests" },
     { path: "/utils", label: "Utils" },
+    { path: "/notes", label: "Digital Garden" },
 ];
 
 export default function Navbar() {
     const pathname = usePathname();
 
     return (
-        <header className="sticky top-0 z-50 w-full backdrop-blur.md bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-200 dark:border-zinc-800">
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between max-w-5xl">
+        <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-5xl rounded-full bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all duration-300">
+            <div className="px-5 h-14 flex items-center justify-between">
                 <Link href="/" className="font-bold text-lg tracking-tighter">
-                    Vector<span className="text-blue-500">.</span>
+                    Vatsal<span className="text-blue-500">.</span>
                 </Link>
 
-                <nav className="hidden md:flex items-center gap-1">
+                <nav className="hidden lg:flex items-center gap-1">
                     {navItems.map((item) => {
                         const isActive = pathname === item.path || (item.path !== "/" && pathname?.startsWith(item.path));
                         return (
@@ -47,7 +48,10 @@ export default function Navbar() {
                     })}
                 </nav>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                    <div className="hidden sm:block">
+                        <MediaWidget />
+                    </div>
                     <ThemeToggle />
                 </div>
             </div>

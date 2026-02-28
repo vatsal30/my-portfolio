@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GlobalProvider } from "@/components/GlobalContext";
 import Navbar from "@/components/Navbar";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import FloatingBar from "@/components/FloatingBar";
 import Footer from "@/components/Footer";
 
@@ -40,6 +41,7 @@ export default function RootLayout({
         >
           <GlobalProvider>
             <div className="flex flex-col min-h-screen relative">
+              <ScrollProgress />
               <Navbar />
               <main className="flex-grow pb-24">{children}</main>
               <Footer />

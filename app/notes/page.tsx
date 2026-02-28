@@ -1,6 +1,6 @@
 import { getNotesList } from "@/lib/github";
 import LLMWrapper from "@/components/LLMWrapper";
-import Link from "next/link";
+import NotesList from "@/components/NotesList";
 import { BookOpen } from "lucide-react";
 
 export const metadata = {
@@ -34,27 +34,8 @@ ${notes.map(note => `- [${note.title}](/notes/${note.slug}) (${note.date}): ${no
                     </p>
                 </header>
 
-                <div className="space-y-6 relative border-l border-zinc-200 dark:border-zinc-800 ml-3 md:ml-0 pl-6 md:pl-0 md:border-none">
-                    {notes.map((note) => (
-                        <Link
-                            key={note.slug}
-                            href={`/notes/${note.slug}`}
-                            className="group block p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-green-500 dark:hover:border-green-500 transition-colors"
-                        >
-                            <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-2">
-                                <h2 className="text-xl font-bold group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                                    {note.title}
-                                </h2>
-                                <time className="text-sm text-zinc-500 font-mono">
-                                    {note.date}
-                                </time>
-                            </div>
-                            <p className="text-zinc-600 dark:text-zinc-400">
-                                {note.excerpt}
-                            </p>
-                        </Link>
-                    ))}
-                </div>
+                {/* Interactive Client Notes List */}
+                <NotesList notes={notes} />
             </div>
         </LLMWrapper>
     );

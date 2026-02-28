@@ -3,46 +3,61 @@
 import { motion } from "framer-motion";
 import LLMToggle from "./LLMToggle";
 import { Github, Linkedin, Mail } from "lucide-react";
-import Link from "next/link";
+import { FaXTwitter, FaInstagram, FaDiscord } from "react-icons/fa6";
+import { FloatingDock } from "./ui/FloatingDock";
 
 export default function FloatingBar() {
+    const links = [
+        {
+            title: "GitHub",
+            icon: <Github className="h-full w-full text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 group-hover:dark:text-zinc-100 transition-colors" />,
+            href: "https://github.com/vatsal30",
+        },
+        {
+            title: "LinkedIn",
+            icon: <Linkedin className="h-full w-full text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 group-hover:dark:text-zinc-100 transition-colors" />,
+            href: "https://linkedin.com/in/vatsal30",
+        },
+        {
+            title: "X (Twitter)",
+            icon: <FaXTwitter className="h-full w-full text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 group-hover:dark:text-zinc-100 transition-colors" />,
+            href: "https://x.com/vatsal30",
+        },
+        {
+            title: "Instagram",
+            icon: <FaInstagram className="h-full w-full text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 group-hover:dark:text-zinc-100 transition-colors" />,
+            href: "https://www.instagram.com/vatsal._.30/",
+        },
+        {
+            title: "Discord",
+            icon: <FaDiscord className="h-full w-full text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 group-hover:dark:text-zinc-100 transition-colors" />,
+            href: "https://discord.com/users/vatsal._.30",
+        },
+        {
+            title: "Email",
+            icon: <Mail className="h-full w-full text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 group-hover:dark:text-zinc-100 transition-colors" />,
+            href: "mailto:vatsalds30@gmail.com",
+        },
+    ];
+
     return (
         <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.5 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 p-2 md:p-3 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-700 rounded-full shadow-lg"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 p-1 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow-lg"
         >
-            <div className="flex items-center gap-2 px-2 border-r border-zinc-200 dark:border-zinc-700">
-                <Link
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
-                    aria-label="GitHub"
-                >
-                    <Github size={18} />
-                </Link>
-                <Link
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
-                    aria-label="LinkedIn"
-                >
-                    <Linkedin size={18} />
-                </Link>
-                <Link
-                    href="mailto:contact@example.com"
-                    className="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
-                    aria-label="Email"
-                >
-                    <Mail size={18} />
-                </Link>
+            <div className="pl-3 pr-4 border-r border-zinc-200 dark:border-zinc-700 h-10 flex items-center">
+                <LLMToggle />
             </div>
 
-            <div className="px-2">
-                <LLMToggle />
+            {/* We override the internal background color of Aceternity's Dock as we wrap it inside our own beautiful glass pill */}
+            <div className="flex items-center">
+                <FloatingDock
+                    items={links}
+                    desktopClassName="bg-transparent dark:bg-transparent border-none h-12 pb-1 gap-2"
+                    mobileClassName="mb-1"
+                />
             </div>
         </motion.div>
     );

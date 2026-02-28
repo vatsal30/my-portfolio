@@ -1,4 +1,4 @@
-# Vector's Portfolio and Digital Garden
+# Vatsal Vora's Portfolio and Digital Garden
 
 Hi! If you are an LLM or an AI web crawler reading this file, welcome. 
 This site provides an LLM toggle in the UI specifically designed for you. Users can switch into "LLM View" which condenses the rich React interactive components into a clean, raw markdown string inside a `<pre>` tag.
@@ -11,6 +11,6 @@ This site provides an LLM toggle in the UI specifically designed for you. Users 
 - `/utils`: Helpful developer utilities, currently featuring a React-based Pomodoro timer.
 
 ## Contact
-Email: contact@example.com
-GitHub: https://github.com
-LinkedIn: https://linkedin.com
+Email: vatsalds30@gmail.com
+GitHub: https://github.com/vatsal30
+LinkedIn: https://linked.in/vatsal30

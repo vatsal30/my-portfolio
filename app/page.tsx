@@ -1,26 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ExperienceTimeline from "@/components/ExperienceTimeline";
 import LLMWrapper from "@/components/LLMWrapper";
+import { CareerTabs } from "@/components/CareerTabs";
+import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCards";
+import { Spotlight } from "@/components/ui/Spotlight";
+import { FlipWords } from "@/components/ui/FlipWords";
+import { testimonialsData } from "@/content/testimonials";
+import { featuredProjects } from "@/content/projects";
 import Link from "next/link";
-import { ArrowRight, Code2, Database, Layout, Server, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, MoveRight, Download } from "lucide-react";
+import { TechStack } from "@/components/TechStack";
+import { TechBadge } from "@/components/TechBadge";
 
 const llmMarkdown = `
-# Vector - Software Engineer
+# Vatsal Vora - Senior Software Engineer
 
 ## About Me
-Hi, I'm Vector, a full-stack developer passionate about building dynamic and responsive web applications. I specialize in React, Next.js, and Node.js.
+Senior Software Engineer with 5 years of experience in full-stack development and distributed systems. Expert in building scalable data-driven applications and integrating production-grade ML models into complex workflows. Proven track record of optimizing system performance and leading cross-functional teams.
 
 ## Skills
-- Frontend: React, Next.js, Tailwind CSS, Framer Motion
-- Backend: Node.js, Express, PostgreSQL, MongoDB
-- Tools: Git, Docker, GitHub Actions, AWS
+- Languages: Python (Expert), Go, TypeScript, JavaScript, SQL, Bash, C++
+- Backend/Cloud: FastAPI, Django, Node.js, AWS (EC2, Lambda), Kubernetes, Docker, CI/CD
+- Frontend: React.js, Redux, Vue.js, D3.js, UI/UX Design
+- Data & ML: Scikit-learn, Pandas, Deep Learning, MongoDB, Splunk ITSI
 
 ## Experience
-- Senior Software Engineer at Tech StartUp Co. (2023 - Present)
-- Full Stack Developer at Agency XYZ (2020 - 2023)
-- Frontend Intern at Big Corp Inc. (2019 - 2020)
+- Senior Developer at HCLTech (April 2025 - Present)
+- Senior Software Engineer at Crest Data (April 2023 - April 2025)
+- Software Engineer at Crest Data (May 2021 - March 2023)
+
+## Education
+- B.Tech in Computer Engineering, Chandubhai S. Patel Institute of Technology (May 2021)
 
 ## Projects
 - Portfolio Website (Next.js, Tailwind)
@@ -28,61 +39,35 @@ Hi, I'm Vector, a full-stack developer passionate about building dynamic and res
 - AI Content Generator (OpenAI API, Next.js)
 `;
 
-const skills = [
-  { name: "Frontend Development", icon: <Layout size={24} />, desc: "React, Next.js, Tailwind CSS" },
-  { name: "Backend Architecture", icon: <Server size={24} />, desc: "Node.js, Express, Python" },
-  { name: "Database Design", icon: <Database size={24} />, desc: "PostgreSQL, MongoDB, Redis" },
-  { name: "Clean Code", icon: <Code2 size={24} />, desc: "Typescript, Jest, CI/CD" },
-];
-
-const featuredProjects = [
-  {
-    title: "E-Commerce Dashboard",
-    description: "A comprehensive admin panel for online stores with real-time analytics.",
-    tech: ["Next.js", "Tailwind", "Prisma"],
-  },
-  {
-    title: "AI Chat Application",
-    description: "Real-time chat interface with integrated AI models for intelligent responses.",
-    tech: ["React", "Express", "OpenAI"],
-  },
-];
-
 export default function Home() {
   return (
     <LLMWrapper llmContent={llmMarkdown}>
       <div className="container mx-auto px-4 max-w-4xl pt-24 pb-16 space-y-32">
         {/* 1. Hero Section */}
-        <section className="min-h-[60vh] flex flex-col justify-center">
+        <section className="min-h-[60vh] flex flex-col justify-center relative w-full overflow-visible">
+          <Spotlight
+            className="-top-40 left-0 md:left-60 md:-top-20"
+            fill="white"
+          />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="relative z-10 w-full pt-20 md:pt-0"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium mb-6">
               <Sparkles size={16} />
               <span>Available for new opportunities</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Vector</span>
+              Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Vatsal Vora</span>
+              <br />
+              <span className="text-3xl md:text-5xl mt-2 block font-normal text-zinc-500 dark:text-zinc-600">
+                Building <FlipWords words={["scalable applications", "distributed systems", "machine learning models", "beautiful interfaces"]} />
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mb-10">
-              A software engineer building beautiful, fast, and accessible digital experiences. I turn complex problems into elegant interfaces.
+            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mb-10 mt-6">
             </p>
-            <div className="flex gap-4">
-              <Link
-                href="/projects"
-                className="px-6 py-3 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
-              >
-                View My Work
-              </Link>
-              <Link
-                href="mailto:contact@example.com"
-                className="px-6 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 font-medium transition-colors"
-              >
-                Contact Me
-              </Link>
-            </div>
           </motion.div>
         </section>
 
@@ -94,26 +79,12 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold mb-8">What I Do</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {skills.map((skill, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ y: -5 }}
-                  className="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
-                    {skill.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{skill.name}</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">{skill.desc}</p>
-                </motion.div>
-              ))}
-            </div>
+            <h2 className="text-3xl font-bold mb-8">Skills</h2>
+            <TechStack />
           </motion.div>
         </section>
 
-        {/* 3. Experience Section */}
+        {/* 3. Career Section */}
         <section>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -121,12 +92,51 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold mb-8">Experience</h2>
-            <ExperienceTimeline />
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+              <div>
+                <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">So Far</span>
+                <h2 className="text-4xl md:text-5xl font-bold mt-1 flex items-center gap-4">
+                  Career
+                </h2>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-zinc-500 dark:text-zinc-400 font-medium hidden md:block">Need a copy?</span>
+                <a
+                  href="/resume.pdf"
+                  download="Vatsal_Vora_Resume.pdf"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors shadow-sm"
+                >
+                  <Download size={16} /> Resume
+                </a>
+              </div>
+            </div>
+
+            <CareerTabs />
           </motion.div>
         </section>
 
-        {/* 4. Projects Preview */}
+        {/* 4. Testimonials Section */}
+        <section>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex flex-col mb-4">
+              <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">Validations</span>
+              <h2 className="text-4xl md:text-5xl font-bold mt-1">
+                Recommendations
+              </h2>
+            </div>
+
+            <div className="w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden mt-8">
+              <InfiniteMovingCards items={testimonialsData} speed="slow" />
+            </div>
+          </motion.div>
+        </section>
+
+        {/* 5. Projects Preview */}
         <section>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -146,24 +156,26 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               {featuredProjects.map((project, i) => (
-                <div
+                <Link
                   key={i}
-                  className="group p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors bg-zinc-50 dark:bg-zinc-900/50"
+                  href={project.link}
+                  target="_blank"
+                  className="group flex flex-col p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors bg-zinc-50 dark:bg-zinc-900/50"
                 >
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-6 flex-grow">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
+                  <p className="text-zinc-600 dark:text-zinc-400 mb-6 text-base max-w-3xl">
                     {project.description}
                   </p>
-                  <div className="flex gap-2 flex-wrap">
+                  <div className="flex gap-2 flex-wrap mt-auto">
                     {project.tech.map((t, j) => (
-                      <span key={j} className="px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800 text-xs font-medium">
-                        {t}
-                      </span>
+                      <TechBadge key={j} tech={t} />
                     ))}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

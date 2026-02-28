@@ -1,7 +1,8 @@
-import { getRepositories } from "@/lib/github";
+import { featuredProjects } from "@/content/projects";
 import GithubCalendarWidget from "@/components/GithubCalendarWidget";
 import LLMWrapper from "@/components/LLMWrapper";
-import { GitFork, Star, ExternalLink, Github } from "lucide-react";
+import { TechBadge } from "@/components/TechBadge";
+import { ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -10,8 +11,7 @@ export const metadata = {
 };
 
 export default async function ProjectsPage() {
-    const repos = await getRepositories();
-    const githubUsername = "vercel"; // Replace with your actual GitHub username
+    const githubUsername = "vatsal30"; // Replace with your actual GitHub username
 
     const llmMarkdown = `
 # Projects & GitHub Activity
@@ -19,8 +19,8 @@ export default async function ProjectsPage() {
 ## GitHub Contributions
 I am actively contributing to open source on GitHub (${githubUsername}).
 
-## Open Source Repositories
-${repos.map(repo => `- **${repo.name}**: ${repo.description || "No description"} (Stars: ${repo.stargazers_count}, Language: ${repo.language})`).join('\\n')}
+## Featured Projects
+${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No description"} (Tech: ${repo.tech.join(", ")})`).join('\n')}
   `;
 
     // Function to provide a color map for languages
@@ -62,51 +62,39 @@ ${repos.map(repo => `- **${repo.name}**: ${repo.description || "No description"}
                 <section className="space-y-6">
                     <h2 className="text-2xl font-bold">Featured Repositories</h2>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {repos.length > 0 ? (
-                            repos.map((repo) => (
-                                <div
-                                    key={repo.id}
-                                    className="flex flex-col h-full p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group"
+                    <div className="grid grid-cols-1 gap-6">
+                        {featuredProjects.length > 0 ? (
+                            featuredProjects.map((repo, idx) => (
+                                <Link
+                                    key={idx}
+                                    href={repo.link}
+                                    target="_blank"
+                                    className="flex flex-col h-full p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group"
                                 >
-                                    <div className="flex-grow space-y-3">
+                                    <div className="flex-grow space-y-4">
                                         <div className="flex items-start justify-between">
-                                            <h3 className="text-xl font-bold truncate pr-4 text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                                {repo.name}
+                                            <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                                {repo.title}
                                             </h3>
-                                            <Link
-                                                href={repo.html_url}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
-                                                aria-label={`View ${repo.name} on GitHub`}
+                                            <div
+                                                className="text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors"
+                                                aria-label={`View ${repo.title} on GitHub`}
                                             >
                                                 <ExternalLink size={20} />
-                                            </Link>
+                                            </div>
                                         </div>
 
-                                        <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-3">
+                                        <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-4xl leading-relaxed">
                                             {repo.description || "No description provided."}
                                         </p>
                                     </div>
 
-                                    <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800/50 flex items-center gap-4 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-                                        {repo.language && (
-                                            <div className="flex items-center gap-1.5">
-                                                <span className={`w-2.5 h-2.5 rounded-full ${getLanguageColor(repo.language)}`} />
-                                                {repo.language}
-                                            </div>
-                                        )}
-                                        <div className="flex items-center gap-1">
-                                            <Star size={14} className="group-hover:text-yellow-500 transition-colors" />
-                                            {repo.stargazers_count}
-                                        </div>
-                                        <div className="flex items-center gap-1">
-                                            <GitFork size={14} />
-                                            {repo.forks_count}
-                                        </div>
+                                    <div className="mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800/50 flex flex-wrap items-center gap-2">
+                                        {repo.tech.map((t, j) => (
+                                            <TechBadge key={j} tech={t} />
+                                        ))}
                                     </div>
-                                </div>
+                                </Link>
                             ))
                         ) : (
                             <div className="col-span-full py-12 text-center text-zinc-500 dark:text-zinc-400 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl">

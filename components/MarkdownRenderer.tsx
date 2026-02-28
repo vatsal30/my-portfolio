@@ -2,6 +2,9 @@
 
 import ReactMarkdown from "react-markdown";
 import { type Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github-dark.css";
 
 interface MarkdownRendererProps {
     content: string;
@@ -34,13 +37,29 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             </pre>
         ),
         a: ({ ...props }) => (
-            <a className="font-medium px-0.5 text-green-600 underline underline-offset-4 hover:text-green-500 dark:text-green-500 hover:dark:text-green-400 transition-colors" {...props} />
+            <a className="font-medium px-0.5 text-green-600 underline underline-offset-4 hover:text-green-500 dark:text-green-500 hover:dark:text-green-400 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />
         ),
+        table: ({ ...props }) => (
+            <div className="overflow-x-auto my-8 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                <table className="w-full text-sm text-left border-collapse" {...props} />
+            </div>
+        ),
+        thead: ({ ...props }) => <thead className="bg-zinc-100 dark:bg-zinc-900/80 text-zinc-900 dark:text-zinc-100" {...props} />,
+        tbody: ({ ...props }) => <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 bg-white dark:bg-zinc-950/20" {...props} />,
+        tr: ({ ...props }) => <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors" {...props} />,
+        th: ({ ...props }) => <th className="px-4 py-3 font-bold border-b border-zinc-200 dark:border-zinc-800 whitespace-nowrap" {...props} />,
+        td: ({ ...props }) => <td className="px-4 py-3 text-zinc-700 dark:text-zinc-300" {...props} />,
     };
 
     return (
         <div className="markdown-body">
-            <ReactMarkdown components={components}>{content}</ReactMarkdown>
+            <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight]}
+                components={components}
+            >
+                {content}
+            </ReactMarkdown>
         </div>
     );
 }
