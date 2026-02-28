@@ -5,6 +5,7 @@ import LLMToggle from "./LLMToggle";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { FaXTwitter, FaInstagram, FaDiscord } from "react-icons/fa6";
 import { FloatingDock } from "./ui/FloatingDock";
+import { SpotifyWidget } from "./SpotifyWidget";
 
 export default function FloatingBar() {
     const links = [
@@ -47,8 +48,12 @@ export default function FloatingBar() {
             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.5 }}
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 p-1 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow-lg"
         >
-            <div className="pl-3 pr-4 border-r border-zinc-200 dark:border-zinc-700 h-10 flex items-center">
+            <div className="pl-3 pr-[1px] border-r border-zinc-200 dark:border-zinc-700 h-10 flex items-center">
                 <LLMToggle />
+            </div>
+
+            <div className="flex items-center hidden sm:flex">
+                <SpotifyWidget />
             </div>
 
             {/* We override the internal background color of Aceternity's Dock as we wrap it inside our own beautiful glass pill */}

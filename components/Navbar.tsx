@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-import { MediaWidget } from "./MediaWidget";
+import { LofiWidget } from "./LofiWidget";
 
 const navItems = [
     { path: "/", label: "Home" },
@@ -50,7 +50,7 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-2">
                     <div className="hidden sm:block">
-                        <MediaWidget />
+                        <LofiWidget />
                     </div>
                     <ThemeToggle />
                 </div>

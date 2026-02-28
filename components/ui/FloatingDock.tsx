@@ -175,18 +175,7 @@ function IconContainer({
                 onMouseLeave={() => setHovered(false)}
                 className="aspect-square rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center relative"
             >
-                <AnimatePresence>
-                    {hovered && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 10, x: "-50%" }}
-                            animate={{ opacity: 1, y: 0, x: "-50%" }}
-                            exit={{ opacity: 0, y: 2, x: "-50%" }}
-                            className="px-2 py-0.5 whitespace-pre rounded-md bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-900 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-xs font-semibold text-zinc-900 dark:text-zinc-100"
-                        >
-                            {title}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {/* Tooltips removed per user request */}
                 <motion.div
                     style={{ width: widthIcon, height: heightIcon }}
                     className="flex items-center justify-center"
