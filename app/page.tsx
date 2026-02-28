@@ -126,11 +126,11 @@ export default function Home() {
             <div className="flex flex-col mb-4">
               <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">Validations</span>
               <h2 className="text-4xl md:text-5xl font-bold mt-1">
-                Recommendations
+                Testimonials
               </h2>
             </div>
 
-            <div className="w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden mt-8">
+            <div className="w-full relative overflow-hidden mt-8 rounded-2xl">
               <InfiniteMovingCards items={testimonialsData} speed="slow" />
             </div>
           </motion.div>

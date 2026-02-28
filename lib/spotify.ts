@@ -51,7 +51,7 @@ export const getSpotifyTopTracks = async (): Promise<MediaItem[]> => {
 
     try {
         const { access_token } = await getAccessToken();
-        const res = await fetch(`${TOP_TRACKS_ENDPOINT}?time_range=short_term&limit=10`, {
+        const res = await fetch(`${TOP_TRACKS_ENDPOINT}?time_range=medium_term&limit=10`, {
             headers: {
                 Authorization: `Bearer ${access_token}`
             },

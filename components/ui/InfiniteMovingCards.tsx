@@ -20,25 +20,16 @@ export const InfiniteMovingCards = ({
     className?: string;
 }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const scrollerRef = React.useRef<HTMLUListElement>(null);
 
     useEffect(() => {
         addAnimation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [start, setStart] = useState(false);
 
     function addAnimation() {
-        if (containerRef.current && scrollerRef.current) {
-            const scrollerContent = Array.from(scrollerRef.current.children);
-
-            scrollerContent.forEach((item) => {
-                const duplicatedItem = item.cloneNode(true);
-                if (scrollerRef.current) {
-                    scrollerRef.current.appendChild(duplicatedItem);
-                }
-            });
-
+        if (containerRef.current) {
             getDirection();
             getSpeed();
             setStart(true);
@@ -73,6 +64,9 @@ export const InfiniteMovingCards = ({
         }
     };
 
+    // Duplicate array natively in React rather than using JS cloneNode so onClick states survive
+    const duplicatedItems = [...items, ...items];
+
     return (
         <div
             ref={containerRef}
@@ -82,44 +76,61 @@ export const InfiniteMovingCards = ({
             )}
         >
             <ul
-                ref={scrollerRef}
                 className={cn(
-                    "flex min-w-full shrink-0 gap-8 py-4 w-max flex-nowrap",
+                    "flex min-w-full shrink-0 gap-8 py-4 w-max flex-nowrap items-start",
                     start && "animate-infinite-scroll-cards",
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
             >
-                {items.map((item, idx) => (
-                    <li
-                        className="w-[350px] max-w-full relative rounded-2xl border border-zinc-200 dark:border-zinc-800 flex-shrink-0 border-b-0 px-8 py-6 md:w-[450px] bg-white/50 dark:bg-zinc-900/50 hover:bg-white dark:hover:bg-zinc-900 transition-colors shadow-sm"
-                        key={item.name + idx}
-                    >
-                        <div className="flex flex-col h-full justify-between">
-                            <div className="relative z-20 text-sm md:text-base leading-[1.6] text-zinc-700 dark:text-zinc-300 font-normal mb-8">
-                                "{item.quote}"
-                            </div>
-                            <div className="relative z-20 mt-auto flex flex-row items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-4">
-                                <span className="flex flex-col gap-1">
-                                    <span className="text-sm font-semibold leading-[1.6] text-zinc-900 dark:text-zinc-100">
-                                        {item.name}
-                                    </span>
-                                    <span className="text-xs font-medium leading-[1.6] text-zinc-500 dark:text-zinc-400">
-                                        {item.role} @ {item.company}
-                                    </span>
-                                </span>
-                                <Link
-                                    href={item.linkedinUrl}
-                                    target="_blank"
-                                    className="p-2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
-                                    title={`Visit ${item.name}'s LinkedIn profile`}
-                                >
-                                    <Linkedin size={18} />
-                                </Link>
-                            </div>
-                        </div>
-                    </li>
+                {duplicatedItems.map((item, idx) => (
+                    <TestimonialCard key={item.id + idx} item={item} />
                 ))}
             </ul>
         </div>
+    );
+};
+
+const TestimonialCard = ({ item }: { item: Testimonial }) => {
+    const [expanded, setExpanded] = useState(false);
+
+    // If the quote is particularly long, we enable the toggle.
+    const isLong = item.quote.length > 200;
+
+    return (
+        <li className="w-[350px] h-fit max-w-full relative rounded-2xl border border-zinc-200 dark:border-zinc-800 flex-shrink-0 px-8 py-6 md:w-[450px] bg-white/50 dark:bg-zinc-900/50 hover:bg-white dark:hover:bg-zinc-900 transition-colors shadow-sm">
+            <div className="flex flex-col justify-between gap-6">
+                <div className="relative z-20 text-sm md:text-base leading-[1.6] text-zinc-700 dark:text-zinc-300 font-normal">
+                    <span className={cn("whitespace-pre-wrap transition-all duration-300", !expanded && isLong && "line-clamp-4")}>
+                        {item.quote}
+                    </span>
+                    {isLong && (
+                        <button
+                            onClick={() => setExpanded(!expanded)}
+                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm mt-2 font-medium transition-colors"
+                        >
+                            {expanded ? "Read less" : "Read more"}
+                        </button>
+                    )}
+                </div>
+                <div className="relative z-20 mt-auto flex flex-row items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-4">
+                    <span className="flex flex-col gap-1">
+                        <span className="text-sm font-semibold leading-[1.6] text-zinc-900 dark:text-zinc-100">
+                            {item.name}
+                        </span>
+                        <span className="text-xs font-medium leading-[1.6] text-zinc-500 dark:text-zinc-400">
+                            {item.role} @ {item.company}
+                        </span>
+                    </span>
+                    <Link
+                        href={item.linkedinUrl}
+                        target="_blank"
+                        className="p-2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                        title={`Visit ${item.name}'s LinkedIn profile`}
+                    >
+                        <Linkedin size={18} />
+                    </Link>
+                </div>
+            </div>
+        </li>
     );
 };

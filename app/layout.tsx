@@ -6,7 +6,7 @@ import { GlobalProvider } from "@/components/GlobalContext";
 import Navbar from "@/components/Navbar";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import FloatingBar from "@/components/FloatingBar";
-import Footer from "@/components/Footer";
+import { Footer } from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,9 +43,8 @@ export default function RootLayout({
             <div className="flex flex-col min-h-screen relative">
               <ScrollProgress />
               <Navbar />
-              <main className="flex-grow pb-24">{children}</main>
+              <main className="flex-grow">{children}</main>
               <Footer />
-              {/* pb-24 on main ensures content isn't hidden behind the floating bar */}
               <FloatingBar />
             </div>
           </GlobalProvider>
