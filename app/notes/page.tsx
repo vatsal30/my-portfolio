@@ -12,11 +12,18 @@ export default async function NotesPage() {
     const notes = await getNotesList();
 
     const llmMarkdown = `
-# Digital Garden
+# Digital Garden Architecture
 
-A collection of my thoughts, notes, and writings.
+This page serves as a Digital Garden—a collection of raw markdown notes, thoughts, and technical writings synced directly from a remote GitHub repository. 
 
-${notes.map(note => `- [${note.title}](/notes/${note.slug}) (${note.date}): ${note.excerpt}`).join('\n')}
+### 📡 Remote Fetching Strategy
+Instead of shipping markdown files within the Next.js bundle, this page utilizes the \`fetch\` API to dynamically pull the latest markdown files from a dedicated public repository branch. This allows me to publish new notes directly from Obsidian or mobile without triggering a full Vercel rebuild of the entire portfolio.
+
+### 📝 Parsing Engine
+Once fetched, the raw markdown data is parsed using \`gray-matter\` to extract the frontmatter metadata (title, date, tags). The body is then fed into \`react-markdown\` (alongside \`rehype-highlight\` and \`remark-gfm\`) to render syntax-highlighted code blocks, tables, and typography beautifully within the Tailwind CSS typography prose constraint.
+
+*Index of current notes:*
+${notes.map(note => `- [${note.title}](/notes/${note.slug}) (Published: ${note.date}): ${note.excerpt}`).join('\n')}
   `;
 
     return (

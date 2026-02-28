@@ -58,19 +58,26 @@ export default async function InterestsPage() {
     const games = getGamesData();
 
     const llmMarkdown = `
-# Interests Tracker
+# Engineering The Interests Dashboard
 
-## Music (Spotify Top Tracks)
-${topTracks.map(t => `- ${t.title} by ${t.subtitle}`).join('\n')}
+This dashboard is a live-tracking aggregator that fuses data from three distinct external REST APIs alongside a local, parsed Markdown database, acting as a real-time reflection of my digital footprint.
 
-## Movies & TV
-${movies.map(m => `- ${m.title} (${m.subtitle})`).join('\n')}
+### 🎧 Spotify Web API (OAuth 2.0)
+The top tracks section authenticates securely to Spotify using a Refresh Token flow, hitting the '/me/top/tracks' endpoint to pull a high-fidelity list of my most listened-to audio.
 
-## Anime
-${anime.map(a => `- ${a.title} (Ep: ${a.subtitle})`).join('\n')}
+### 🍿 TMDB & AniList (GraphQL & REST)
+My watched media is synced via two massive databases:
+1. **TMDB (The Movie Database):** REST API fetching my recently logged films and TV shows.
+2. **AniList:** A GraphQL query pulling my active watch statuses for Japanese Animation.
 
-## Games
-${games.map(g => `- ${g.title} (${g.subtitle})`).join('\n')}
+### 🎮 Local Markdown (Gray-Matter)
+My gaming backlog is maintained in a local 'games.md' file. At build/request time, Next.js utilizes 'fs' to read the file and 'gray-matter' to parse the YAML frontmatter, aggressively typed into a 'MediaItem' interface.
+
+*Raw Data Feed:*
+- **Music**: ${topTracks.map(t => typeof t.title === 'string' ? t.title + ' by ' + t.subtitle : '').join(', ')}
+- **Movies**: ${movies.map(m => typeof m.title === 'string' ? m.title : '').join(', ')}
+- **Anime**: ${anime.map(a => typeof a.title === 'string' ? a.title : '').join(', ')}
+- **Games**: ${games.map(g => typeof g.title === 'string' ? g.title : '').join(', ')}
   `;
 
     return (

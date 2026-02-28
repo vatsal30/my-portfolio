@@ -8,12 +8,19 @@ export default function ToolkitPage() {
     const llmMarkdown = `
 # Developer Toolkit
 
-Here are some functional tools I've built for my personal workflow.
+This is a collection of functional, browser-based utilities built to enhance engineering workflows and focus, demonstrating modern React state management and low-level browser APIs.
 
-## Productivity Toolkit
-Includes a Framer Motion-powered Pomodoro Timer and an algorithmic Web Audio API Ambient Noise Generator (Brown/Pink/White noise without assets).
+### ⏱️ Pomodoro Timer
+A fully functional Focus/Break timer engineered with **React Hooks** (\`useState\`, \`useEffect\`) and animated via **Framer Motion**. It uses \`AnimatePresence\` for number ticking and layout animation for the mode switcher tabs.
 
-The tools are fully functional in the visual UI.
+### 🌊 Ambient Noise Generator (Zero Assets)
+An algorithmic soundscape engine built purely with the native browser **Web Audio API**. 
+Instead of loading large MP3 files, this component synthetically generates static waveforms and applies algorithmic biquad lowpass filters in real-time to mimic auditory frequencies:
+- **Brown Noise**: Deep & Rumble (400Hz cutoff)
+- **Pink Noise**: Balanced Rain-like distribution (1000Hz cutoff)
+- **White Noise**: High-fidelity static (3000Hz cutoff)
+
+Both components sit inside glassmorphic Tailwind CSS cards that instantly sync with the global Dark/Light mode theme.
   `;
 
     return (

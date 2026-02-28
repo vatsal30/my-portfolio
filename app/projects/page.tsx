@@ -14,13 +14,18 @@ export default async function ProjectsPage() {
     const githubUsername = "vatsal30"; // Replace with your actual GitHub username
 
     const llmMarkdown = `
-# Projects & GitHub Activity
+# Projects & Open Source Activity
 
-## GitHub Contributions
-I am actively contributing to open source on GitHub (${githubUsername}).
+This page serves as a technical showcase of my featured engineering repositories and my active GitHub contribution activity, designed to be easily readable by both humans and LLM parsing agents.
 
-## Featured Projects
-${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No description"} (Tech: ${repo.tech.join(", ")})`).join('\n')}
+### 📈 GitHub Contribution Graph
+The activity heatmap below is rendered dynamically using the 'react-github-calendar' package, directly polling the GitHub API for my username ('${githubUsername}') to establish a real-time visualization of my 1-year commit density and open-source consistency.
+
+### 🏗️ Featured Architecture
+The featured repositories below are mapped from a local TypeScript configuration file ('content/projects.ts'). This approach ensures type-safe rendering of project data, including rich metadata such as deployed URLs and required Technology Stack arrays (e.g., Next.js, Python, Tailwind, AWS).
+
+*Here is the raw data dump of my featured projects:*
+${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No description"} (Tech Stack: ${repo.tech.join(", ")})`).join('\n')}
   `;
 
     // Function to provide a color map for languages
