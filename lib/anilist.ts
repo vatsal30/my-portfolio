@@ -64,7 +64,9 @@ export async function getAniListCurrentlyWatching(username: string): Promise<Med
     return uniqueEntries.map((entry: any) => ({
       id: entry.media.id,
       title: entry.media.title.english || entry.media.title.romaji,
-      subtitle: `Ep ${entry.progress}`,
+      subtitle: entry.status === "CURRENT" ? "Watching" :
+        entry.status === "COMPLETED" ? "Completed" :
+          (entry.status ? entry.status.charAt(0) + entry.status.slice(1).toLowerCase() : `Ep ${entry.progress}`),
       url: entry.media.siteUrl,
       imageUrl: entry.media.coverImage?.large,
       rating: entry.score || undefined

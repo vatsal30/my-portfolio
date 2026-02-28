@@ -62,13 +62,20 @@ export const getSpotifyTopTracks = async (): Promise<MediaItem[]> => {
 
         if (!data.items) return [];
 
-        return data.items.map((track: any) => ({
-            id: track.id,
-            title: track.name,
-            subtitle: track.artists.map((_artist: any) => _artist.name).join(', '),
-            url: track.external_urls.spotify,
-            imageUrl: track.album.images?.[0]?.url
-        }));
+        return data.items.map((track: any) => {
+            const min = Math.floor(track.duration_ms / 60000);
+            const sec = ((track.duration_ms % 60000) / 1000).toFixed(0);
+
+            return {
+                id: track.id,
+                title: track.name,
+                subtitle: track.artists.map((_artist: any) => _artist.name).join(', '),
+                url: track.external_urls.spotify,
+                imageUrl: track.album.images?.[0]?.url,
+                duration: `${min}:${Number(sec) < 10 ? '0' : ''}${sec}`,
+                popularity: track.popularity
+            };
+        });
     } catch (e) {
         console.error("Error fetching Spotify.", e);
         return [];

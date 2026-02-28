@@ -84,35 +84,44 @@ ${games.map(g => `- ${g.title} (${g.subtitle})`).join('\n')}
                 </header>
 
                 {/* Music Section */}
-                <section className="space-y-6">
-                    <h2 className="text-2xl font-bold flex items-center gap-2">
-                        <Music className="text-green-500" /> Spotify Top Tracks
-                    </h2>
-                    <MediaGrid items={topTracks} exportName="vatsal_music.json" />
+                <section>
+                    <MediaGrid
+                        title="Spotify Top Tracks"
+                        icon={<Music className="text-green-500" />}
+                        items={topTracks}
+                        exportName="vatsal_music.json"
+                        layout="list"
+                    />
                 </section>
 
                 {/* Anime Section */}
-                <section className="space-y-6">
-                    <h2 className="text-2xl font-bold flex items-center gap-2">
-                        <Tv className="text-blue-500" /> Anime
-                    </h2>
-                    <MediaGrid items={anime} exportName="vatsal_anime.json" />
+                <section>
+                    <MediaGrid
+                        title="Anime"
+                        icon={<Tv className="text-blue-500" />}
+                        items={anime}
+                        exportName="vatsal_anime.json"
+                    />
                 </section>
 
                 {/* Movies & TV Section */}
-                <section className="space-y-6">
-                    <h2 className="text-2xl font-bold flex items-center gap-2">
-                        <Film className="text-purple-500" /> Movies & TV
-                    </h2>
-                    <MediaGrid items={movies} exportName="vatsal_movies.json" />
+                <section>
+                    <MediaGrid
+                        title="Movies & TV"
+                        icon={<Film className="text-purple-500" />}
+                        items={movies}
+                        exportName="vatsal_movies.json"
+                    />
                 </section>
 
                 {/* Games Section */}
-                <section className="space-y-6">
-                    <h2 className="text-2xl font-bold flex items-center gap-2">
-                        <Gamepad2 className="text-orange-500" /> Games
-                    </h2>
-                    <MediaGrid items={games} exportName="vatsal_games.json" />
+                <section>
+                    <MediaGrid
+                        title="Games"
+                        icon={<Gamepad2 className="text-orange-500" />}
+                        items={games}
+                        exportName="vatsal_games.json"
+                    />
                 </section>
 
             </div>
