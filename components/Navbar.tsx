@@ -10,7 +10,7 @@ const navItems = [
     { path: "/", label: "Home" },
     { path: "/projects", label: "Projects" },
     { path: "/interests", label: "Interests" },
-    { path: "/utils", label: "Utils" },
+    { path: "/toolkit", label: "Tools" },
     { path: "/notes", label: "Digital Garden" },
 ];
 

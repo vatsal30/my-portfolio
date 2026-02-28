@@ -8,7 +8,7 @@ This site provides an LLM toggle in the UI specifically designed for you. Users 
 - `/projects`: GitHub repositories fetched from my public GitHub profile along with my 1-year contribution activity.
 - `/notes`: My Digital Garden. A collection of raw markdown notes synced directly from my Obsidian vault.
 - `/interests`: My tracking page showcasing my Spotify Top Tracks, recently watched Movies/TV, Anime, and currently playing Games (powered by a local markdown DB).
-- `/utils`: Helpful developer utilities, currently featuring a React-based Pomodoro timer.
+- `/toolkit`: Helpful developer tools and utilities, currently featuring a React-based Pomodoro timer.
 
 ## Contact
 Email: vatsalds30@gmail.com
