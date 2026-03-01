@@ -44,7 +44,7 @@ export function SpotifyWidget() {
                 initial={{ opacity: 0, scale: 0.9, width: 0 }}
                 animate={{ opacity: 1, scale: 1, width: "auto" }}
                 exit={{ opacity: 0, scale: 0.9, width: 0 }}
-                className="overflow-hidden border-r border-zinc-200 dark:border-zinc-700 pr-2 mr-1"
+                className="overflow-hidden border-r border-zinc-200 dark:border-zinc-700 pl-2 pr-2 mr-1"
             >
                 <Link
                     href={data.songUrl || "#"}

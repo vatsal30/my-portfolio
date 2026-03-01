@@ -9,6 +9,9 @@ import FloatingBar from "@/components/FloatingBar";
 import { Footer } from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { TopNavigation } from "@/components/TopNavigation";
+import { FixedThemeToggle } from "@/components/FixedThemeToggle";
+// import { FixedWebring } from "@/components/FixedWebring";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +47,9 @@ export default function RootLayout({
           <GlobalProvider>
             <div className="flex flex-col min-h-screen relative pb-24 md:pb-0">
               <ScrollProgress />
-              <Navbar />
+              <TopNavigation />
+              <FixedThemeToggle />
+              {/* <FixedWebring /> */}
               <main className="flex-grow">{children}</main>
               <Footer />
               <FloatingBar />

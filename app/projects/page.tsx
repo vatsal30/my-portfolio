@@ -4,6 +4,7 @@ import LLMWrapper from "@/components/LLMWrapper";
 import { TechBadge } from "@/components/TechBadge";
 import { ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
+import { ProjectCard } from "@/components/ProjectCard";
 
 export const metadata = {
     title: "Projects | My Portfolio",
@@ -67,38 +68,16 @@ ${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No d
                 <section className="space-y-6">
                     <h2 className="text-2xl font-bold">Featured Repositories</h2>
 
-                    <div className="grid grid-cols-1 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 w-full">
                         {featuredProjects.length > 0 ? (
                             featuredProjects.map((repo, idx) => (
-                                <Link
+                                <Link 
                                     key={idx}
-                                    href={repo.link}
-                                    target="_blank"
-                                    className="flex flex-col h-full p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-purple-500 dark:hover:border-purple-500 transition-colors group"
+                                    href={repo.link} 
+                                    target="_blank" 
+                                    className="block w-full outline-none focus:ring-2 focus:ring-purple-500 rounded-2xl h-full"
                                 >
-                                    <div className="flex-grow space-y-4">
-                                        <div className="flex items-start justify-between">
-                                            <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                                                {repo.title}
-                                            </h3>
-                                            <div
-                                                className="text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors"
-                                                aria-label={`View ${repo.title} on GitHub`}
-                                            >
-                                                <ExternalLink size={20} />
-                                            </div>
-                                        </div>
-
-                                        <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-4xl leading-relaxed">
-                                            {repo.description || "No description provided."}
-                                        </p>
-                                    </div>
-
-                                    <div className="mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800/50 flex flex-wrap items-center gap-2">
-                                        {repo.tech.map((t, j) => (
-                                            <TechBadge key={j} tech={t} />
-                                        ))}
-                                    </div>
+                                    <ProjectCard project={repo} />
                                 </Link>
                             ))
                         ) : (
