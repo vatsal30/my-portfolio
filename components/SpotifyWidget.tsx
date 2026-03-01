@@ -30,7 +30,7 @@ export function SpotifyWidget() {
         };
 
         fetchNowPlaying();
-        const interval = setInterval(fetchNowPlaying, 15000);
+        const interval = setInterval(fetchNowPlaying, 60000); // Increased to 60s to avoid Spotify 429 Rate Limits
 
         return () => clearInterval(interval);
     }, []);

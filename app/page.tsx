@@ -79,7 +79,12 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold mb-8">Skills</h2>
+            <div className="mb-10 lg:mb-14">
+              <h2 className="text-3xl lg:text-5xl font-bold tracking-tight mb-4">Core Stack</h2>
+              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+                I'm a generalist at heart who can build with anything, but here's the core stack I've spent the most time with:
+              </p>
+            </div>
             <TechStack />
           </motion.div>
         </section>
@@ -124,7 +129,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex flex-col mb-4">
-              <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">Validations</span>
+              <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">What people say about me</span>
               <h2 className="text-4xl md:text-5xl font-bold mt-1">
                 Testimonials
               </h2>
@@ -155,7 +160,7 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              {featuredProjects.map((project, i) => (
+              {featuredProjects.slice(0, 2).map((project, i) => (
                 <Link
                   key={i}
                   href={project.link}

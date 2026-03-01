@@ -42,7 +42,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <GlobalProvider>
-            <div className="flex flex-col min-h-screen relative">
+            <div className="flex flex-col min-h-screen relative pb-24 md:pb-0">
               <ScrollProgress />
               <Navbar />
               <main className="flex-grow">{children}</main>
