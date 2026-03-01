@@ -21,7 +21,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         li: ({ ...props }) => <li className="text-zinc-700 dark:text-zinc-300" {...props} />,
         blockquote: ({ ...props }) => (
             <blockquote
-                className="mt-6 border-l-4 border-green-500 pl-6 italic text-zinc-600 dark:text-zinc-400 bg-green-50/50 dark:bg-green-900/10 py-3 pr-4 rounded-r-lg"
+                className="mt-6 border-l-4 border-purple-500 pl-6 italic text-zinc-600 dark:text-zinc-400 bg-purple-50/50 dark:bg-purple-900/10 py-3 pr-4 rounded-r-lg"
                 {...props}
             />
         ),
@@ -37,7 +37,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             </pre>
         ),
         a: ({ ...props }) => (
-            <a className="font-medium px-0.5 text-green-600 underline underline-offset-4 hover:text-green-500 dark:text-green-500 hover:dark:text-green-400 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />
+            <a className="font-medium px-0.5 text-purple-600 underline underline-offset-4 hover:text-purple-500 dark:text-purple-500 hover:dark:text-purple-400 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />
         ),
         table: ({ ...props }) => (
             <div className="overflow-x-auto my-8 border border-zinc-200 dark:border-zinc-800 rounded-lg">

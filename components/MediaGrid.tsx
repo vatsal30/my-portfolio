@@ -90,7 +90,7 @@ export default function MediaGrid({ items, exportName, initialCount = 10, title,
                                     )}
                                 </div>
                                 {activeItem.url && (
-                                    <a href={activeItem.url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold text-center mt-2 hover:bg-green-600 transition-colors">
+                                    <a href={activeItem.url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 bg-purple-500 text-white px-6 py-3 rounded-xl font-semibold text-center mt-2 hover:bg-purple-600 transition-colors">
                                         <Play size={16} className="fill-current" />
                                         Play on Spotify
                                     </a>

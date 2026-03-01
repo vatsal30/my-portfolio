@@ -94,7 +94,7 @@ My gaming backlog is maintained in a local 'games.md' file. At build/request tim
                 <section>
                     <MediaGrid
                         title="Spotify Top Tracks"
-                        icon={<Music className="text-green-500" />}
+                        icon={<Music className="text-purple-500" />}
                         items={topTracks}
                         exportName="vatsal_music.json"
                         layout="list"
@@ -105,7 +105,7 @@ My gaming backlog is maintained in a local 'games.md' file. At build/request tim
                 <section>
                     <MediaGrid
                         title="Anime"
-                        icon={<Tv className="text-blue-500" />}
+                        icon={<Tv className="text-purple-500" />}
                         items={anime}
                         exportName="vatsal_anime.json"
                     />

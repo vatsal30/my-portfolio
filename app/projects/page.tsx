@@ -31,7 +31,7 @@ ${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No d
     // Function to provide a color map for languages
     const getLanguageColor = (lang: string) => {
         const colors: Record<string, string> = {
-            TypeScript: "bg-blue-500",
+            TypeScript: "bg-purple-500",
             JavaScript: "bg-yellow-400",
             Python: "bg-emerald-500",
             Rust: "bg-orange-500",
@@ -74,11 +74,11 @@ ${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No d
                                     key={idx}
                                     href={repo.link}
                                     target="_blank"
-                                    className="flex flex-col h-full p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group"
+                                    className="flex flex-col h-full p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-purple-500 dark:hover:border-purple-500 transition-colors group"
                                 >
                                     <div className="flex-grow space-y-4">
                                         <div className="flex items-start justify-between">
-                                            <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                            <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                                 {repo.title}
                                             </h3>
                                             <div

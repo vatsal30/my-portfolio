@@ -60,7 +60,7 @@ export function PomodoroTimer() {
             <motion.div
                 className={cn(
                     "absolute bottom-0 left-0 h-1.5 opacity-20",
-                    mode === "pomodoro" ? "bg-red-500" : "bg-blue-500"
+                    mode === "pomodoro" ? "bg-red-500" : "bg-purple-500"
                 )}
                 initial={{ width: "0%" }}
                 animate={{ width: `${calculateProgress()}%` }}
@@ -69,7 +69,7 @@ export function PomodoroTimer() {
 
             <div className="flex items-center justify-between gap-2 mb-8">
                 <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-bold text-xl">
-                    <Timer className={cn("transition-colors duration-500", mode === "pomodoro" ? "text-red-500" : "text-blue-500")} />
+                    <Timer className={cn("transition-colors duration-500", mode === "pomodoro" ? "text-red-500" : "text-purple-500")} />
                     <h2>Pomodoro Session</h2>
                 </div>
             </div>
@@ -89,7 +89,7 @@ export function PomodoroTimer() {
                                 layoutId="pomodoro-tab"
                                 className={cn(
                                     "absolute inset-0 rounded-xl -z-10",
-                                    m === "pomodoro" ? "bg-red-500" : "bg-blue-500"
+                                    m === "pomodoro" ? "bg-red-500" : "bg-purple-500"
                                 )}
                                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                             />
@@ -114,7 +114,7 @@ export function PomodoroTimer() {
                         }}
                         className={cn(
                             "text-8xl md:text-9xl font-mono text-center font-bold tracking-tighter absolute tabular-nums transition-colors duration-500",
-                            mode === "pomodoro" ? "text-zinc-900 dark:text-zinc-50" : "text-blue-600 dark:text-blue-400"
+                            mode === "pomodoro" ? "text-zinc-900 dark:text-zinc-50" : "text-purple-600 dark:text-purple-400"
                         )}
                     >
                         {formatTime(timeLeft)}
@@ -129,7 +129,7 @@ export function PomodoroTimer() {
                     onClick={toggleTimer}
                     className={cn(
                         "w-20 h-20 flex items-center justify-center rounded-2xl text-white shadow-xl transition-colors duration-500",
-                        mode === "pomodoro" ? "bg-red-500 hover:bg-red-600" : "bg-blue-500 hover:bg-blue-600"
+                        mode === "pomodoro" ? "bg-red-500 hover:bg-red-600" : "bg-purple-500 hover:bg-purple-600"
                     )}
                     aria-label={isActive ? "Pause" : "Start"}
                 >

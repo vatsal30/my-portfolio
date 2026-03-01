@@ -138,14 +138,14 @@ export function AmbientNoiseGenerator() {
         <div className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm shadow-xl shadow-black/5 dark:shadow-black/20">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-bold text-xl">
-                    <Waves className="text-blue-500" />
+                    <Waves className="text-purple-500" />
                     <h2>Ambient Focus Mix</h2>
                 </div>
                 <button
                     onClick={togglePlay}
                     className={cn(
                         "w-12 h-12 flex items-center justify-center rounded-full text-white transition-all shadow-md active:scale-95",
-                        isPlaying ? "bg-zinc-800 dark:bg-zinc-700 hover:bg-zinc-700 dark:hover:bg-zinc-600" : "bg-blue-600 hover:bg-blue-500"
+                        isPlaying ? "bg-zinc-800 dark:bg-zinc-700 hover:bg-zinc-700 dark:hover:bg-zinc-600" : "bg-purple-600 hover:bg-purple-500"
                     )}
                 >
                     {isPlaying ? <Pause size={20} className="fill-current" /> : <Play size={20} className="fill-current ml-1" />}
@@ -195,7 +195,7 @@ export function AmbientNoiseGenerator() {
                             step="0.01"
                             value={volume}
                             onChange={(e) => setVolume(parseFloat(e.target.value))}
-                            className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                            className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-purple-500"
                         />
                     </div>
                 </div>
@@ -205,7 +205,7 @@ export function AmbientNoiseGenerator() {
                     {[...Array(5)].map((_, i) => (
                         <div
                             key={i}
-                            className="w-1 bg-blue-500 rounded-full animate-pulse"
+                            className="w-1 bg-purple-500 rounded-full animate-pulse"
                             style={{ 
                                 height: `${Math.random() * 100}%`,
                                 animationDuration: `${0.5 + Math.random()}s`,
@@ -226,7 +226,7 @@ function NoiseButton({ active, onClick, label, icon, desc }: { active: boolean, 
             className={cn(
                 "flex flex-col items-center justify-center p-3 rounded-xl border transition-all text-center",
                 active 
-                    ? "border-blue-500 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 shadow-sm" 
+                    ? "border-purple-500 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 shadow-sm" 
                     : "border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/80"
             )}
         >

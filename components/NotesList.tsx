@@ -45,7 +45,7 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
             <div className="space-y-4">
                 <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <Search size={18} className="text-zinc-400 group-focus-within:text-green-500 transition-colors" />
+                        <Search size={18} className="text-zinc-400 group-focus-within:text-purple-500 transition-colors" />
                     </div>
                     <input
                         ref={searchInputRef}
@@ -53,7 +53,7 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
                         placeholder="Search notes..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-16 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
+                        className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-16 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
                     />
                     <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                         <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[10px] font-medium text-zinc-500 dark:text-zinc-400">
@@ -67,7 +67,7 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
                         <button
                             onClick={() => setActiveCategory(null)}
                             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeCategory === null
-                                    ? "bg-green-500 text-white shadow-sm"
+                                    ? "bg-purple-500 text-white shadow-sm"
                                     : "bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
                                 }`}
                         >
@@ -78,7 +78,7 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
                                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeCategory === category
-                                        ? "bg-green-500 text-white shadow-sm"
+                                        ? "bg-purple-500 text-white shadow-sm"
                                         : "bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
                                     }`}
                             >
@@ -96,10 +96,10 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
                         <Link
                             key={note.slug}
                             href={`/notes/${note.slug}`}
-                            className="group block p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-green-500 dark:hover:border-green-500 transition-colors"
+                            className="group block p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 hover:border-purple-500 dark:hover:border-purple-500 transition-colors"
                         >
                             <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-3">
-                                <h2 className="text-xl font-bold group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                                <h2 className="text-xl font-bold group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                     {note.title}
                                 </h2>
                                 <time className="text-sm text-zinc-500 font-mono shrink-0">

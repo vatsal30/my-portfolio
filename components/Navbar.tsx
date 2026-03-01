@@ -25,7 +25,7 @@ export default function Navbar() {
             <div className="rounded-full bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all duration-300">
                 <div className="px-5 h-14 flex items-center justify-between">
                     <Link href="/" className="font-bold text-lg tracking-tighter" onClick={() => setIsOpen(false)}>
-                        Vatsal<span className="text-blue-500">.</span>
+                        Vatsal<span className="text-purple-500">.</span>
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -36,14 +36,14 @@ export default function Navbar() {
                                 <Link
                                     key={item.path}
                                     href={item.path}
-                                    className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive ? "text-blue-600 dark:text-blue-400" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900"
+                                    className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive ? "text-purple-600 dark:text-purple-400" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900"
                                         }`}
                                 >
                                     {item.label}
                                     {isActive && (
                                         <motion.div
                                             layoutId="navbar-indicator"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-t-full"
+                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-500 rounded-t-full"
                                             initial={false}
                                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                         />
@@ -87,7 +87,7 @@ export default function Navbar() {
                                     href={item.path}
                                     onClick={() => setIsOpen(false)}
                                     className={`px-4 py-3 rounded-xl text-base font-semibold transition-all ${isActive
-                                            ? "bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                                            ? "bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400"
                                             : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                                         }`}
                                 >

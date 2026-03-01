@@ -31,7 +31,7 @@ ${notes.map(note => `- [${note.title}](/notes/${note.slug}) (Published: ${note.d
             <div className="container mx-auto px-4 max-w-3xl pt-24 pb-16 space-y-12">
                 <header className="space-y-4">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="p-3 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+                        <div className="p-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
                             <BookOpen size={28} />
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Digital Garden</h1>

@@ -106,7 +106,7 @@ const TestimonialCard = ({ item }: { item: Testimonial }) => {
                     {isLong && (
                         <button
                             onClick={() => setExpanded(!expanded)}
-                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm mt-2 font-medium transition-colors"
+                            className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 text-sm mt-2 font-medium transition-colors"
                         >
                             {expanded ? "Read less" : "Read more"}
                         </button>
@@ -124,7 +124,7 @@ const TestimonialCard = ({ item }: { item: Testimonial }) => {
                     <Link
                         href={item.linkedinUrl}
                         target="_blank"
-                        className="p-2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                        className="p-2 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors"
                         title={`Visit ${item.name}'s LinkedIn profile`}
                     >
                         <Linkedin size={18} />

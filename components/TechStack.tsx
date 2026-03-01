@@ -99,7 +99,7 @@ export function TechStack() {
                             {skillsCategories.map((category) => (
                                 <motion.div variants={itemVariants} key={category.name} className="space-y-4">
                                     <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 border-b border-zinc-100 dark:border-zinc-800 pb-2 flex items-center gap-2">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                                        <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
                                         {category.name}
                                     </h3>
                                     <div className="grid grid-cols-2 gap-2">
@@ -108,10 +108,10 @@ export function TechStack() {
                                                 key={skill.name}
                                                 whileHover={{ scale: 1.05, y: -2 }}
                                                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                                                className="group flex items-center gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-blue-500/30 dark:hover:border-blue-500/30 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 hover:shadow-lg hover:shadow-blue-500/5 cursor-default relative overflow-hidden"
+                                                className="group flex items-center gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-purple-500/30 dark:hover:border-purple-500/30 hover:bg-purple-50/50 dark:hover:bg-purple-900/10 hover:shadow-lg hover:shadow-purple-500/5 cursor-default relative overflow-hidden"
                                             >
                                                 {/* Hidden background flare on hover */}
-                                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-purple-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+                                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
 
                                                 <div className="h-6 w-6 shrink-0 transition-all duration-300">
                                                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -122,7 +122,7 @@ export function TechStack() {
                                                         loading="lazy"
                                                     />
                                                 </div>
-                                                <span className="text-sm font-semibold tracking-tight text-zinc-500 dark:text-zinc-400 group-hover:text-blue-900 dark:group-hover:text-blue-100 transition-colors">
+                                                <span className="text-sm font-semibold tracking-tight text-zinc-500 dark:text-zinc-400 group-hover:text-purple-900 dark:group-hover:text-purple-100 transition-colors">
                                                     {skill.name}
                                                 </span>
                                             </motion.div>
