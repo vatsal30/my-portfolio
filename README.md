@@ -42,7 +42,8 @@ You need a GitHub Personal Access Token (`GITHUB_TOKEN`) with `Contents: Read-on
    ```bash
    npm install
    ```
-3. Create a `.env.local` file at the root of the project:
+3. Setup your `.env` file:
+   You'll need a few API keys if you want the Spotify and GitHub widgets to work
 
    ```env
    # GitHub (Needed for Digital Garden)
@@ -95,5 +96,3 @@ The minimalist, terminal-driven aesthetic of this portfolio was heavily inspired
 - [Jason Cameron](https://jasoncameron.dev)
 - [Prasoon](https://prasoon.dev)
 - [Aceternity UI](https://ui.aceternity.com/)
-
-_Designed and built by [Vatsal Vora](https://github.com/vatsal30)_
