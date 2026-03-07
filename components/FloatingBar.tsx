@@ -53,15 +53,24 @@ export default function FloatingBar() {
                 <LLMToggle />
             </div>
 
-            <div className="flex items-center hidden sm:flex">
+            <div className="hidden sm:flex items-center">
                 <SpotifyWidget />
             </div>
 
-            {/* We override the internal background color of Aceternity's Dock as we wrap it inside our own beautiful glass pill */}
+            {/* Desktop dock (magnification effect) */}
             <div className="hidden md:flex items-center">
                 <FloatingDock
                     items={links}
                     desktopClassName="bg-transparent dark:bg-transparent border-none h-12 pb-1 gap-2"
+                    mobileClassName=""
+                />
+            </div>
+
+            {/* Mobile dock (hamburger, visible only below md) */}
+            <div className="flex md:hidden items-center pl-1">
+                <FloatingDock
+                    items={links}
+                    desktopClassName="hidden"
                     mobileClassName="mb-1"
                 />
             </div>

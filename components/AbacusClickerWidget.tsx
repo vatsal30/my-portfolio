@@ -77,7 +77,7 @@ export function AbacusClickerWidget() {
                             Completely pointless, yet oddly satisfying.
                         </p>
                         <p className="text-zinc-400 font-mono text-xs">
-                            Powered by <span className="text-emerald-400">Abacus</span>
+                            Powered by <span className="text-purple-400">Abacus</span>
                         </p>
                     </motion.div>
                 )}
@@ -91,7 +91,7 @@ export function AbacusClickerWidget() {
                     key={count}
                     initial={{ scale: 0.8, opacity: 0.5, y: -10 }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}
-                    className="text-4xl sm:text-5xl md:text-6xl font-black font-mono tracking-tight text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.3)]"
+                    className="text-4xl sm:text-5xl md:text-6xl font-black font-mono tracking-tight text-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.3)]"
                 >
                     {count.toLocaleString()}
                 </motion.div>
@@ -99,7 +99,7 @@ export function AbacusClickerWidget() {
                 {/* Click Button */}
                 <button
                     onClick={handleClick}
-                    className="px-8 py-3 rounded-2xl bg-emerald-300 hover:bg-emerald-200 text-emerald-950 font-bold font-mono tracking-wider transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(110,231,183,0.4)]"
+                    className="px-8 py-3 rounded-2xl bg-purple-500 hover:bg-purple-400 text-white font-bold font-mono tracking-wider transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(168,85,247,0.4)]"
                 >
                     CLICK ME
                 </button>
@@ -125,7 +125,7 @@ export function AbacusClickerWidget() {
             {/* Background Glow */}
             <div className="absolute inset-0 z-0 pointer-events-none opacity-20 dark:opacity-40" 
                 style={{
-                    background: 'radial-gradient(circle at center, rgba(52, 211, 153, 0.4) 0%, transparent 70%)'
+                    background: 'radial-gradient(circle at center, rgba(168, 85, 247, 0.4) 0%, transparent 70%)'
                 }}
             />
         </div>

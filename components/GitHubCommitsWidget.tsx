@@ -67,10 +67,10 @@ export function GitHubCommitsWidget({ username }: { username: string }) {
     <div className="flex flex-col h-full bg-zinc-50 dark:bg-[#f4f4f5]/[0.02] border border-zinc-200 dark:border-zinc-800/60 rounded-2xl p-5 transition-all font-mono">
       <div className="flex items-center justify-between mb-5 text-sm">
         <div className="flex items-center gap-2">
-            <GitCommitHorizontal className="text-red-400" size={16} />
+            <GitCommitHorizontal className="text-purple-400" size={16} />
             <h3 className="font-bold text-zinc-900 dark:text-zinc-100 font-sans tracking-tight">~ Recent Commits</h3>
         </div>
-        <span className="text-red-400/80 font-mono tracking-wider">[info]</span>
+        <span className="text-purple-400/80 font-mono tracking-wider">[info]</span>
       </div>
 
       <div className="flex-grow space-y-2.5">
@@ -100,7 +100,7 @@ export function GitHubCommitsWidget({ username }: { username: string }) {
       </div>
       
       <div className="mt-5 pt-4 flex items-center justify-between">
-        <a href={`https://github.com/${username}`} target="_blank" className="text-xs md:text-sm font-semibold text-red-400/80 hover:text-red-500 dark:text-[#f87171] dark:hover:text-red-400 transition-colors font-sans">
+        <a href={`https://github.com/${username}`} target="_blank" className="text-xs md:text-sm font-semibold text-purple-500 hover:text-purple-400 dark:text-purple-400 dark:hover:text-purple-300 transition-colors font-sans">
             View on Github
         </a>
         
