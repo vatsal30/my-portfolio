@@ -93,46 +93,58 @@ export async function getNotesList(): Promise<NoteMeta[]> {
     }
     const rootItems = await rootRes.json();
 
-    // 2. Filter for directories only (ignore root files)
-    const directories = rootItems.filter(
-      (item: any) => item.type === "dir" && !item.name.startsWith("."),
+    // 2. Filter for top-level directories (skip hidden and Private)
+    const SKIP_DIRS = new Set(["Private"]);
+    const topLevelDirs = rootItems.filter(
+      (item: any) =>
+        item.type === "dir" &&
+        !item.name.startsWith(".") &&
+        !SKIP_DIRS.has(item.name),
     );
 
-    let allNotes: NoteMeta[] = [];
-
-    // 3. Fetch contents of each directory
-    for (const dir of directories) {
-      if (dir.name === "2026 Arc") {
-        continue;
-      }
-
-      const dirRes = await fetch(
-        `https://api.github.com/repos/${NOTES_REPO}/contents/${dir.path}`,
+    // 3. Recursively fetch all .md files from a directory path
+    const fetchNotesFromDir = async (
+      dirPath: string,
+      category: string, // Always the top-level dir name
+    ): Promise<NoteMeta[]> => {
+      const res = await fetch(
+        `https://api.github.com/repos/${NOTES_REPO}/contents/${dirPath}`,
         { headers, next: { revalidate: 3600 } },
       );
-      if (!dirRes.ok) continue;
+      if (!res.ok) return [];
 
-      const dirItems = await dirRes.json();
-      const mdFiles = dirItems.filter(
-        (item: any) => item.type === "file" && item.name.endsWith(".md"),
-      );
+      const items = await res.json();
+      let notes: NoteMeta[] = [];
 
-      const notesFromDir = mdFiles.map((file: any) => {
-        const title = file.name.replace(".md", "");
-        return {
-          slug: slugify(title),
-          title: title,
-          category: dir.name,
-          date: new Date().toISOString().split("T")[0], // Placeholder date or you could fetch commit history
-          excerpt: `Note from ${dir.name}`,
-          path: file.path,
-        };
-      });
+      for (const item of items) {
+        if (item.type === "file" && item.name.endsWith(".md")) {
+          const title = item.name.replace(".md", "");
+          notes.push({
+            slug: slugify(title),
+            title,
+            category,
+            date: new Date().toISOString().split("T")[0],
+            excerpt: `Note from ${category}`,
+            path: item.path,
+          });
+        } else if (item.type === "dir" && !item.name.startsWith(".")) {
+          // Recurse into subdirectory, keeping the top-level category
+          const subNotes = await fetchNotesFromDir(item.path, category);
+          notes = [...notes, ...subNotes];
+        }
+      }
 
-      allNotes = [...allNotes, ...notesFromDir];
+      return notes;
+    };
+
+    // 4. Gather notes from all top-level dirs (recursively)
+    let allNotes: NoteMeta[] = [];
+    for (const dir of topLevelDirs) {
+      const notes = await fetchNotesFromDir(dir.path, dir.name);
+      allNotes = [...allNotes, ...notes];
     }
 
-    // 4. Sort notes by date descending (using placeholder for now)
+    // 5. Sort by date descending
     return allNotes.sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     );

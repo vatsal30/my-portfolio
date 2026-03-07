@@ -11,41 +11,41 @@ export const featuredProjects: Project[] = [
   {
     title: "My Portfolio",
     description:
-      "My personal developer portfolio featuring a digital garden, integrated Spotify/TMDB stats, and an LLM-friendly markdown view.",
+      "My personal developer portfolio — a digital workspace with a garden, Spotify/TMDB integrations, aura effects, and an LLM-friendly markdown view.",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
     link: "https://github.com/vatsal30/my-portfolio",
     date: "March 2026",
     story:
-      "This is the third major iteration of my web presence. I wanted to move away from overly complex 3D animations and focus strictly on high-performance minimalism, typography, and functional features like the Markdown API feed for agents.",
+      "The second major iteration of my web presence. V2 doubles down on high-performance minimalism — I added an Aura Mode with zen ripple effects, fixed dark mode detection, a persistent Abacus click counter, LLM-friendly markdown mode, and a fully revamped tech stack showcasing my real skills. Built to feel like a workspace, not just a resume.",
   },
   {
     title: "Melanoma Detection",
     description:
-      "Developed a robust melanoma detection model using Convolutional Neural Networks, achieving high accuracy in classifying skin lesions from dermoscopic images.",
+      "A CNN-based melanoma detection model that classifies skin lesions from dermoscopic images with high accuracy.",
     tech: ["Python", "TensorFlow", "Keras", "OpenCV"],
     link: "https://github.com/vatsal30/Melanoma-Detection",
     date: "May 2024",
     story:
-      "Built during my time at college, this computer vision pipeline parses thousands of dermoscopic images to spot malignant lesions. Getting the recall high enough took weeks of hyperparameter tuning and data augmentation.",
+      "Built during college — this computer vision pipeline parses thousands of dermoscopic images to spot malignant lesions. Getting recall high enough took weeks of hyperparameter tuning and data augmentation.",
   },
   {
     title: "LeetCode Solutions",
     description:
-      "A comprehensive collection of optimized data structures and algorithms solutions, demonstrating problem-solving across various challenges.",
+      "A well-organized collection of optimized DSA solutions across topics — from Trees & Graphs to segment trees.",
     tech: ["Python", "JavaScript", "Algorithms"],
     link: "https://github.com/vatsal30/LeetCode",
     date: "Continuous",
     story:
-      "My daily journal of algorithm practice. It's heavily organized by topic—from generic Trees & Graphs all the way down to obscure segment tree implementations.",
+      "My daily algorithm journal, heavily organized by topic. It's the kind of repo that grows a little every time I hit a problem I can't shake.",
   },
   {
     title: "Advent of Code Solutions",
     description:
-      "A collection of solutions to the annual Advent of Code challenge, showcasing problem-solving skills and algorithmic thinking.",
+      "My solutions to the annual Advent of Code — sometimes elegant, sometimes brute-forced, always fun.",
     tech: ["Python", "Algorithms"],
     link: "https://github.com/vatsal30/Advent-of-Code",
     date: "December Yearly",
     story:
-      "Ah, the December tradition. These repositories hold all of my sometimes elegant, sometimes horribly brute-forced solutions to the famous 25-day coding gauntlet.",
+      "The December tradition. 25 days, 25 puzzles, varying levels of coffee required. These repos hold every solution from my clean ones to my 'it works, don't ask' ones.",
   },
 ];
