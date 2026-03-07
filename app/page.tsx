@@ -168,7 +168,7 @@ export default function Home() {
                 }}
               >
                 <Image
-                  src="https://github.com/vatsal30.png"
+                  src="/images/avatar.png"
                   alt="Vatsal Vora Profile"
                   width={160}
                   height={160}

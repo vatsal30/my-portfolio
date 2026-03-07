@@ -23,15 +23,17 @@ export default function AboutPage() {
                 <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
                     {/* Image Column */}
                     <div className="space-y-6">
-                        <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900/50">
+                        <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900/50 group">
                             <Image 
-                                src="https://github.com/vatsal30.png"
-                                alt="Vatsal Vora"
+                                src="/images/dbz-sheet.png"
+                                alt="Vatsal Vora Character Sheet"
                                 fill
-                                className="object-cover hover:scale-105 transition-transform duration-700"
-                                unoptimized
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
                             />
                         </div>
+                        <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400 text-center italic mt-2 w-full">
+                            * Me, if I was drawn by Akira Toriyama *
+                        </p>
                         
                         <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 space-y-4">
                             <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-widest font-sans">Superpower</h3>
