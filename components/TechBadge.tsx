@@ -1,21 +1,22 @@
 import {
-    SiPython,
-    SiTensorflow,
-    SiKeras,
-    SiOpencv,
-    SiCplusplus,
-    SiNextdotjs,
-    SiTailwindcss,
-    SiFramer,
-    SiJavascript,
-    SiHtml5,
-    SiCss3
+    SiPython, SiTensorflow, SiKeras, SiOpencv, SiCplusplus,
+    SiNextdotjs, SiTailwindcss, SiFramer, SiJavascript, SiHtml5, SiCss3
 } from "react-icons/si";
 import { BrainCircuit } from "lucide-react";
 
-export function TechBadge({ tech }: { tech: string }) {
-    let Icon = null;
+// Cycle through these to give each badge a distinct but harmonious color
+const TAG_COLORS = [
+    "text-green-600  dark:text-green-400",
+    "text-orange-500 dark:text-orange-400",
+    "text-purple-600 dark:text-purple-400",
+    "text-sky-600    dark:text-sky-400",
+    "text-rose-500   dark:text-rose-400",
+];
 
+export function TechBadge({ tech, index = 0 }: { tech: string; index?: number }) {
+    const color = TAG_COLORS[index % TAG_COLORS.length];
+
+    let Icon = null;
     switch (tech.toLowerCase()) {
         case "python": Icon = SiPython; break;
         case "tensorflow": Icon = SiTensorflow; break;
@@ -33,9 +34,10 @@ export function TechBadge({ tech }: { tech: string }) {
     }
 
     return (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800 text-xs font-medium text-zinc-700 dark:text-zinc-300 shadow-sm border border-black/5 dark:border-white/5">
-            {Icon && <Icon className="w-3.5 h-3.5" />}
+        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 text-xs font-mono font-semibold border border-zinc-200 dark:border-zinc-700/50 ${color}`}>
+            {Icon && <Icon className="w-3 h-3 shrink-0" />}
             {tech}
         </span>
     );
 }
+

@@ -70,13 +70,25 @@ You need a GitHub Personal Access Token (`GITHUB_TOKEN`) with `Contents: Read-on
 I've kept content separated so you don't have to dig through complex components to update your details. Just head over to the `/content` folder:
 
 - `career.ts` — Update your work history.
-- `projects.ts` — Show off your best work.
-- `skills.ts` — List your tech stack (supports custom icon URLs for tools not in SimpleIcons).
+- `projects.ts` — Show off your best work. Update `outputFile` names to match your repos.
+- `skills.ts` — List your tech stack (supports custom `iconUrl` for tools not in SimpleIcons).
 - `testimonials.ts` — Add some nice things people have said about you.
+
+## 🖼️ Project Card Images
+
+Project cards use **static pre-generated PNG thumbnails** instead of live API calls, keeping page loads fast. Run this once to generate them (and again any time you update projects or want fresh star counts):
+
+```bash
+npm run gen:projects
+```
+
+This uses Puppeteer to render and screenshot each card with live GitHub star counts, saving them to `public/projects/`. Puppeteer is already installed as a dev dependency.
+
+> If you fork this, update the `projects` array in `utils/generate-project-images.js` to match your own repos.
 
 ## 🚢 Deployment
 
-Optimized for **Vercel** or **Netlify**. The app uses Next.js ISR (`next: { revalidate: 3600 }`) so external data like GitHub activity updates automatically without a full redeploy.
+Optimized for **Vercel** or **Netlify**. The app uses Next.js ISR (`next: { revalidate: 3600 }`) so external data like GitHub activity updates automatically without a full redeploy. Remember to commit your generated images in `public/projects/` before deploying.
 
 ## 🤝 Contributing
 

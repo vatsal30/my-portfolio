@@ -12,7 +12,7 @@ import { featuredProjects } from "@/content/projects";
 import { ArrowRight, Download, Music, Briefcase, Mail, Github, Linkedin } from "lucide-react";
 import { FaXTwitter, FaInstagram, FaDiscord } from "react-icons/fa6";
 import { TechStack } from "@/components/TechStack";
-import { TechBadge } from "@/components/TechBadge";
+import FeaturedProjects from "@/components/FeaturedProjects";
 import { LocationWidget } from "@/components/LocationWidget";
 import { GitHubCommitsWidget } from "@/components/GitHubCommitsWidget";
 import { LofiWidget } from "@/components/LofiWidget";
@@ -168,7 +168,7 @@ export default function Home() {
                 }}
               >
                 <Image
-                  src="https://github.com/vatsal30.png"
+                  src="/images/avatar.png"
                   alt="Vatsal Vora Profile"
                   width={160}
                   height={160}
@@ -323,30 +323,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              {featuredProjects.slice(0, 2).map((project, i) => (
-                <Link
-                  key={i}
-                  href={project.link}
-                  target="_blank"
-                  className="group flex flex-col p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-purple-500 dark:hover:border-purple-500 transition-colors bg-zinc-50 dark:bg-zinc-900/50"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-2xl font-bold group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-6 text-base max-w-3xl">
-                    {project.description}
-                  </p>
-                  <div className="flex gap-2 flex-wrap mt-auto">
-                    {project.tech.map((t, j) => (
-                      <TechBadge key={j} tech={t} />
-                    ))}
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <FeaturedProjects />
 
             <Link
               href="/projects"
