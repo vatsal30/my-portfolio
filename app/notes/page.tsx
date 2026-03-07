@@ -1,7 +1,8 @@
+import { BookOpen } from "lucide-react";
+
 import { getNotesList } from "@/lib/github";
 import LLMWrapper from "@/components/LLMWrapper";
 import NotesList from "@/components/NotesList";
-import { BookOpen } from "lucide-react";
 
 export const metadata = {
     title: "Digital Garden | My Portfolio",

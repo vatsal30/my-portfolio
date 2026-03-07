@@ -1,9 +1,10 @@
-import { getNoteContent, getNotesList } from "@/lib/github";
-import LLMWrapper from "@/components/LLMWrapper";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
+
+import { getNoteContent, getNotesList } from "@/lib/github";
+import LLMWrapper from "@/components/LLMWrapper";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 // Needed for static generation of dynamic routes if doing SSG
 export async function generateStaticParams() {

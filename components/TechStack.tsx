@@ -55,7 +55,7 @@ export function TechStack() {
                                         <div className="h-10 w-10 transition-all duration-300">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img
-                                                src={`https://cdn.simpleicons.org/${tech.slug}`}
+                                                src={tech.iconUrl ?? `https://cdn.simpleicons.org/${tech.slug}`}
                                                 alt={tech.name}
                                                 className="h-full w-full object-contain opacity-80 hover:opacity-100 transition-all duration-300 brightness-0 hover:brightness-100 dark:brightness-0 dark:invert dark:hover:invert-0 dark:hover:brightness-100"
                                                 loading="lazy"
@@ -70,7 +70,7 @@ export function TechStack() {
                                         <div className="h-10 w-10 transition-all duration-300">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img
-                                                src={`https://cdn.simpleicons.org/${tech.slug}`}
+                                                src={tech.iconUrl ?? `https://cdn.simpleicons.org/${tech.slug}`}
                                                 alt={tech.name}
                                                 className="h-full w-full object-contain opacity-80 hover:opacity-100 transition-all duration-300 brightness-0 hover:brightness-100 dark:brightness-0 dark:invert dark:hover:invert-0 dark:hover:brightness-100"
                                                 loading="lazy"
@@ -116,7 +116,7 @@ export function TechStack() {
                                                 <div className="h-6 w-6 shrink-0 transition-all duration-300">
                                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                                     <img
-                                                        src={`https://cdn.simpleicons.org/${skill.slug}`}
+                                                        src={skill.iconUrl ?? `https://cdn.simpleicons.org/${skill.slug}`}
                                                         alt={skill.name}
                                                         className="h-full w-full object-contain opacity-50 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-md brightness-0 group-hover:brightness-100 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100"
                                                         loading="lazy"
