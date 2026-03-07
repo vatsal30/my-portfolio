@@ -1,18 +1,19 @@
-import LLMWrapper from "@/components/LLMWrapper";
-import { Music, Film, Gamepad2, Tv } from "lucide-react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { Music, Film, Gamepad2, Tv } from "lucide-react";
+
+import LLMWrapper from "@/components/LLMWrapper";
+import { getSpotifyTopTracks } from "@/lib/spotify";
+import { getTmdbRecentlyWatched } from "@/lib/tmdb";
+import { getAniListCurrentlyWatching } from "@/lib/anilist";
+import MediaGrid, { MediaItem } from "@/components/MediaGrid";
 
 export const metadata = {
     title: "Interests & Tracker | My Portfolio",
     description: "What I'm currently listening to, watching, and playing.",
 };
 
-import { getSpotifyTopTracks } from "@/lib/spotify";
-import { getTmdbRecentlyWatched } from "@/lib/tmdb";
-import { getAniListCurrentlyWatching } from "@/lib/anilist";
-import MediaGrid, { MediaItem } from "@/components/MediaGrid";
 
 // --- Local File Fetcher ---
 function getGamesData(): MediaItem[] {

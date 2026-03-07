@@ -1,17 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-import LLMWrapper from "@/components/LLMWrapper";
-import { CareerTabs } from "@/components/CareerTabs";
-import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCards";
-import { Spotlight } from "@/components/ui/Spotlight";
-import { FlipWords } from "@/components/ui/FlipWords";
-import { testimonialsData } from "@/content/testimonials";
-import { featuredProjects } from "@/content/projects";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Sparkles, MoveRight, Download, Music, Briefcase, Mail, Github, Linkedin } from "lucide-react";
+
+import { CareerTabs } from "@/components/CareerTabs";
+import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCards";
+import { testimonialsData } from "@/content/testimonials";
+import { featuredProjects } from "@/content/projects";
+import { ArrowRight, Download, Music, Briefcase, Mail, Github, Linkedin } from "lucide-react";
 import { FaXTwitter, FaInstagram, FaDiscord } from "react-icons/fa6";
 import { TechStack } from "@/components/TechStack";
 import { TechBadge } from "@/components/TechBadge";
@@ -19,42 +17,73 @@ import { LocationWidget } from "@/components/LocationWidget";
 import { GitHubCommitsWidget } from "@/components/GitHubCommitsWidget";
 import { LofiWidget } from "@/components/LofiWidget";
 import { AbacusClickerWidget } from "@/components/AbacusClickerWidget";
+import LLMWrapper from "@/components/LLMWrapper";
 
 const llmMarkdown = `
-# Vatsal Vora - Senior Software Engineer
+# Vatsal Vora - Full-Stack Engineer | Product Architect
 
-## Skills
-- Languages: Python (Expert), Go, TypeScript, JavaScript, SQL, Bash, C++
-- Backend/Cloud: FastAPI, Django, Node.js, AWS (EC2, Lambda), Kubernetes, Docker, CI/CD
-- Frontend: React.js, Redux, Vue.js, D3.js, UI/UX Design
-- Data & ML: Scikit-learn, Pandas, Deep Learning, MongoDB, Splunk ITSI
+I'm a full-stack developer with 5 years of experience building scalable products that work under pressure. 
+My engineering background is rooted in distributed systems and performance optimization.
 
-## Experience
-- Senior Developer at HCLTech (April 2025 - Present)
-- Senior Software Engineer at Crest Data (April 2023 - April 2025)
-- Software Engineer at Crest Data (May 2021 - March 2023)
+## Professional Profile
+- **Superpower**: Debugging. The one you call for "impossible" bugs.
+- **Philosophy**: Product-first mindset. Building for users, not just specs.
+- **Experience**: 5 years of building & scaling enterprise-grade applications.
 
-## Education
-- B.Tech in Computer Engineering, Chandubhai S. Patel Institute of Technology (May 2021)
+## Technical Skills
+- **Back-end**: Python (Expert), Go, Node.js, FastAPI, Django, SQL, K8s, Docker, AWS.
+- **Front-end**: TypeScript, React.js, Redux, Vue.js, D3.js, Tailwind CSS.
+- **AI/ML**: Scikit-learn, Pandas, OpenAI API, Generative AI integrations.
 
-## Projects
-- Portfolio Website (Next.js, Tailwind)
-- E-Commerce Dashboard (React, Node, PostgreSQL)
-- AI Content Generator (OpenAI API, Next.js)
+## Interests
+- Gaming, Anime, Raspberry Pi tinkering, Hardware projects.
 `;
 
 export default function Home() {
   const [auraActive, setAuraActive] = useState(false);
+  const [stars, setStars] = useState<{x: number, y: number, size: number, duration: number, delay: number}[]>([]);
+
+  useEffect(() => {
+    setStars(Array.from({ length: 40 }).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2 + 1,
+      duration: Math.random() * 3 + 2,
+      delay: Math.random() * 2
+    })));
+  }, []);
 
   return (
     <LLMWrapper llmContent={llmMarkdown}>
-      <div className="container mx-auto px-4 max-w-5xl pt-24 pb-16 space-y-32">
+      {/* Dark Mode Page Border Highlight */}
+      {auraActive && (
+        <div className="fixed inset-0 pointer-events-none z-[100] hidden dark:block border-0 md:border-[1px] border-transparent"
+          style={{ animation: 'page-border-glow 6s ease-in-out infinite' }}
+        />
+      )}
+      
+      {/* Dark Mode Stars Background */}
+      {auraActive && (
+        <div className="fixed inset-0 pointer-events-none z-0 hidden dark:block overflow-hidden">
+          {stars.map((star, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+              style={{
+                width: star.size + 'px',
+                height: star.size + 'px',
+                top: star.y + '%',
+                left: star.x + '%',
+                animation: `star-twinkle ${star.duration}s infinite ${star.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="container mx-auto px-4 max-w-5xl pt-24 pb-16 space-y-32 relative z-10">
         {/* 1. Hero Section V2 (Minimalist) */}
         <section className="min-h-[70vh] flex flex-col justify-center items-center relative w-full overflow-visible py-20 pb-10">
-          <Spotlight
-            className="-top-40 left-0 md:left-60 md:-top-20 dark:hidden"
-            fill="white"
-          />
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -63,29 +92,21 @@ export default function Home() {
           >
             {/* Minimal Portrait */}
             <style>{`
-              @keyframes ss-flicker {
-                0%, 100% { opacity: 0.8; transform: scale(1); }
-                25% { opacity: 1; transform: scale(1.04); }
-                50% { opacity: 0.6; transform: scale(0.97); }
-                75% { opacity: 1; transform: scale(1.02); }
-              }
-              @keyframes ss-swell {
-                0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-                33% { transform: scale(1.08) rotate(3deg); opacity: 0.9; }
-                66% { transform: scale(0.95) rotate(-2deg); opacity: 0.6; }
-              }
-              @keyframes ss-outer {
-                0%, 100% { transform: scale(1); opacity: 0.4; }
-                50% { transform: scale(1.15); opacity: 0.7; }
-              }
-              @keyframes ss-spark {
-                0%, 100% { opacity: 0; transform: scaleY(0.5) translateY(0px); }
-                40% { opacity: 0.9; transform: scaleY(1.2) translateY(-8px); }
-                70% { opacity: 0.5; transform: scaleY(0.9) translateY(-4px); }
+              @keyframes zen-wave {
+                0% { transform: scale(1); opacity: 0.8; border-color: rgba(168, 85, 247, 0.6); }
+                100% { transform: scale(2.8); opacity: 0; border-color: rgba(168, 85, 247, 0); }
               }
               @keyframes ss-portrait-glow {
-                0%, 100% { box-shadow: 0 0 20px 4px rgba(250,204,21,0.4), 0 0 50px 10px rgba(251,146,60,0.25); }
-                50% { box-shadow: 0 0 35px 8px rgba(250,204,21,0.7), 0 0 80px 20px rgba(251,146,60,0.4); }
+                0%, 100% { box-shadow: 0 0 20px 4px rgba(168,85,247,0.4), 0 0 40px 10px rgba(168,85,247,0.25); }
+                50% { box-shadow: 0 0 35px 8px rgba(168,85,247,0.7), 0 0 70px 20px rgba(168,85,247,0.4); }
+              }
+              @keyframes page-border-glow {
+                0%, 100% { box-shadow: inset 0 0 20px rgba(168,85,247,0.2), inset 0 0 40px rgba(168,85,247,0.05); border-color: rgba(168,85,247,0.1); }
+                50% { box-shadow: inset 0 0 40px rgba(168,85,247,0.5), inset 0 0 80px rgba(168,85,247,0.2); border-color: rgba(168,85,247,0.4); }
+              }
+              @keyframes star-twinkle {
+                0%, 100% { opacity: 0.1; transform: scale(0.8); }
+                50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); }
               }
             `}</style>
 
@@ -96,68 +117,32 @@ export default function Home() {
             >
               {/* ── Aura layers (only when active) ────────────────── */}
               {auraActive && (<>
-                {/* Core bright flash */}
+                {/* Zen waves (concentric expanding rings) */}
+                <div style={{
+                  position: 'absolute', inset: '0', borderRadius: '50%',
+                  border: '2px solid rgba(168,85,247,0.8)',
+                  animation: 'zen-wave 3s cubic-bezier(0.0, 0, 0.2, 1) infinite',
+                  zIndex: 1,
+                }} />
+                <div style={{
+                  position: 'absolute', inset: '0', borderRadius: '50%',
+                  border: '2px solid rgba(168,85,247,0.8)',
+                  animation: 'zen-wave 3s cubic-bezier(0.0, 0, 0.2, 1) infinite 1s',
+                  zIndex: 1,
+                }} />
+                <div style={{
+                  position: 'absolute', inset: '0', borderRadius: '50%',
+                  border: '2px solid rgba(168,85,247,0.8)',
+                  animation: 'zen-wave 3s cubic-bezier(0.0, 0, 0.2, 1) infinite 2s',
+                  zIndex: 1,
+                }} />
+                {/* Inner Glow to match waves */}
                 <div style={{
                   position: 'absolute', inset: '-10px', borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(253,224,71,0.9) 0%, rgba(250,204,21,0.5) 40%, transparent 70%)',
-                  filter: 'blur(8px)',
-                  animation: 'ss-flicker 0.4s ease-in-out infinite',
-                  zIndex: 1,
-                }} />
-                {/* Mid ring */}
-                <div style={{
-                  position: 'absolute', inset: '-28px', borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(251,191,36,0.6) 0%, rgba(245,158,11,0.3) 50%, transparent 70%)',
-                  filter: 'blur(14px)',
-                  animation: 'ss-swell 0.7s ease-in-out infinite',
-                  zIndex: 1,
-                }} />
-                {/* Orange outer ring */}
-                <div style={{
-                  position: 'absolute', inset: '-50px', borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(249,115,22,0.35) 0%, rgba(234,88,12,0.15) 55%, transparent 75%)',
-                  filter: 'blur(22px)',
-                  animation: 'ss-swell 1.1s ease-in-out infinite reverse',
-                  zIndex: 1,
-                }} />
-                {/* Wide corona */}
-                <div style={{
-                  position: 'absolute', inset: '-75px', borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(250,204,21,0.2) 0%, rgba(251,146,60,0.1) 50%, transparent 70%)',
-                  filter: 'blur(36px)',
-                  animation: 'ss-outer 1.6s ease-in-out infinite',
-                  zIndex: 1,
-                }} />
-                {/* Upward flame plume */}
-                <div style={{
-                  position: 'absolute',
-                  left: '50%', bottom: '100%',
-                  transform: 'translateX(-50%)',
-                  width: '80px', height: '120px',
-                  background: 'linear-gradient(to top, rgba(250,204,21,0.8) 0%, rgba(251,146,60,0.4) 50%, transparent 100%)',
-                  filter: 'blur(18px)',
-                  animation: 'ss-spark 0.6s ease-in-out infinite',
-                  zIndex: 1,
-                }} />
-                <div style={{
-                  position: 'absolute',
-                  left: '30%', bottom: '90%',
-                  transform: 'translateX(-50%)',
-                  width: '40px', height: '70px',
-                  background: 'linear-gradient(to top, rgba(253,224,71,0.9) 0%, transparent 100%)',
+                  background: 'radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 60%)',
                   filter: 'blur(10px)',
-                  animation: 'ss-spark 0.8s ease-in-out infinite 0.2s',
                   zIndex: 1,
-                }} />
-                <div style={{
-                  position: 'absolute',
-                  left: '70%', bottom: '93%',
-                  transform: 'translateX(-50%)',
-                  width: '35px', height: '60px',
-                  background: 'linear-gradient(to top, rgba(251,146,60,0.8) 0%, transparent 100%)',
-                  filter: 'blur(10px)',
-                  animation: 'ss-spark 0.65s ease-in-out infinite 0.35s',
-                  zIndex: 1,
+                  animation: 'ss-portrait-glow 2s ease-in-out infinite'
                 }} />
               </>)}
 
@@ -175,8 +160,8 @@ export default function Home() {
               <div
                 className="relative w-full h-full rounded-full overflow-hidden border-4 transition-all duration-500"
                 style={auraActive ? {
-                  borderColor: 'rgba(253,224,71,0.7)',
-                  animation: 'ss-portrait-glow 0.8s ease-in-out infinite',
+                  borderColor: 'rgba(168,85,247,0.7)',
+                  animation: 'ss-portrait-glow 2s ease-in-out infinite',
                   zIndex: 10,
                 } : {
                   borderColor: 'rgba(161,161,170,0.3)',
@@ -199,7 +184,7 @@ export default function Home() {
             </h1>
             
             <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-xs md:text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-8 px-4 py-2 border border-zinc-200 dark:border-zinc-800 rounded-full bg-zinc-50 dark:bg-zinc-900/50">
-                <span>/væt.səl vɔː.rə/</span>
+                <span>/væt.səl/</span>
                 <span className="opacity-50">•</span>
                 <span>noun</span>
                 <span className="opacity-50">•</span>
@@ -211,10 +196,10 @@ export default function Home() {
             {/* Bio Paragraphs */}
             <div className="max-w-xl mx-auto space-y-5 text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed text-pretty text-center">
               <p>
-                a full-stack developer and <span className="underline decoration-purple-500 decoration-wavy underline-offset-4 text-zinc-900 dark:text-zinc-200 font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">product builder</span> with deep experience across engineering, distributed systems, and user-centric design.
+                I build products that don&apos;t just look good, but <span className="underline decoration-purple-500 decoration-wavy underline-offset-4 text-zinc-900 dark:text-zinc-200 font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">actually work</span> when it matters. Full-stack by trade, architect by mindset.
               </p>
               <p>
-                a <span className="underline decoration-purple-500 decoration-wavy underline-offset-4 text-zinc-900 dark:text-zinc-200 font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">polymath</span> who bridges technical architecture with business outcomes to create impactful, scalable solutions.
+                I&apos;m the one you call for the <span className="underline decoration-purple-500 decoration-wavy underline-offset-4 text-zinc-900 dark:text-zinc-200 font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">&quot;impossible&quot; bugs</span>. I genuinely enjoy the detective work of untangling complex messes into clean code.
               </p>
             </div>
 

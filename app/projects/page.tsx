@@ -1,9 +1,9 @@
+import { Github } from "lucide-react";
+import Link from "next/link";
+
 import { featuredProjects } from "@/content/projects";
 import GithubCalendarWidget from "@/components/GithubCalendarWidget";
 import LLMWrapper from "@/components/LLMWrapper";
-import { TechBadge } from "@/components/TechBadge";
-import { ExternalLink, Github } from "lucide-react";
-import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 
 export const metadata = {
@@ -28,20 +28,6 @@ The featured repositories below are mapped from a local TypeScript configuration
 *Here is the raw data dump of my featured projects:*
 ${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No description"} (Tech Stack: ${repo.tech.join(", ")})`).join('\n')}
   `;
-
-    // Function to provide a color map for languages
-    const getLanguageColor = (lang: string) => {
-        const colors: Record<string, string> = {
-            TypeScript: "bg-purple-500",
-            JavaScript: "bg-yellow-400",
-            Python: "bg-emerald-500",
-            Rust: "bg-orange-500",
-            Go: "bg-cyan-500",
-            HTML: "bg-red-500",
-            CSS: "bg-indigo-500",
-        };
-        return colors[lang] || "bg-zinc-400";
-    };
 
     return (
         <LLMWrapper llmContent={llmMarkdown}>
