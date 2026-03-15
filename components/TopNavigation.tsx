@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Briefcase, FileText, Heart, Wrench, User } from "lucide-react";
+import { Home, Briefcase, FileText, Heart, Wrench, User, BookOpen } from "lucide-react";
 import { FloatingNav } from "./ui/floating-navbar";
 
 export function TopNavigation() {
@@ -19,6 +19,11 @@ export function TopNavigation() {
       name: "Projects",
       link: "/projects",
       icon: <Briefcase className="h-4 w-4 text-zinc-600" />,
+    },
+    {
+      name: "Articles",
+      link: "/articles",
+      icon: <BookOpen className="h-4 w-4 text-zinc-600" />,
     },
     {
       name: "Notes",

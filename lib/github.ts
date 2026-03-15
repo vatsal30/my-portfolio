@@ -48,6 +48,7 @@ export interface NoteMeta {
   category: string;
   excerpt?: string;
   path: string;
+  tags?: string[];
 }
 
 const slugify = (text: string) => {
@@ -74,7 +75,13 @@ const getHeaders = (isRaw = false) => {
   return headers;
 };
 
+// In-memory cache to avoid redundant API calls during build
+let _notesListCache: NoteMeta[] | null = null;
+
 export async function getNotesList(): Promise<NoteMeta[]> {
+  // Return cached result if available (avoids re-fetching for every note page during build)
+  if (_notesListCache) return _notesListCache;
+
   try {
     const headers = getHeaders(false);
 
@@ -145,9 +152,13 @@ export async function getNotesList(): Promise<NoteMeta[]> {
     }
 
     // 5. Sort by date descending
-    return allNotes.sort(
+    const sorted = allNotes.sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     );
+
+    // Cache the result
+    _notesListCache = sorted;
+    return sorted;
   } catch (error) {
     console.error("Error fetching notes:", error);
     return [];
@@ -166,7 +177,10 @@ export async function getNoteContent(slug: string): Promise<string | null> {
       `https://api.github.com/repos/${NOTES_REPO}/contents/${note.path}`,
       { headers, next: { revalidate: 3600 } },
     );
-    if (!res.ok) throw new Error("Failed to fetch note content");
+    if (!res.ok) {
+      console.warn(`[GitHub] Failed to fetch note "${slug}" (HTTP ${res.status})`);
+      return null;
+    }
 
     return await res.text();
   } catch (error) {

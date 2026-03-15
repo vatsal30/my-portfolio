@@ -26,16 +26,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             />
         ),
         code: ({ ...props }) => {
-            // Inline code vs block code is usually determined by whether it's wrapped in a pre tag by react-markdown, 
-            // but react-markdown v9+ passes the children straight to code.
-            // We'll apply basic inline styles here.
             return <code className="relative rounded bg-zinc-100 dark:bg-zinc-800 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold" {...props} />;
         },
-        pre: ({ ...props }) => (
-            <pre className="mb-4 mt-6 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-950 p-4 relative" {...props}>
-                {props.children}
-            </pre>
-        ),
         a: ({ ...props }) => (
             <a className="font-medium px-0.5 text-purple-600 underline underline-offset-4 hover:text-purple-500 dark:text-purple-500 hover:dark:text-purple-400 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />
         ),
