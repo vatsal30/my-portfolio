@@ -24,8 +24,50 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "Personal Portfolio and Digital Garden",
+  metadataBase: new URL("https://vectorbuilds.dev"),
+  title: {
+    default: "Vatsal Vora | Full-Stack Engineer & Product Architect",
+    template: "%s | Vatsal Vora",
+  },
+  description: "Personal Portfolio and Digital Garden of Vatsal Vora. I build products that don't just look good, but actually work when it matters.",
+  keywords: ["Vatsal Vora", "Software Engineer", "Full-Stack Developer", "Product Architect", "Next.js", "React", "Portfolio", "Digital Garden"],
+  authors: [{ name: "Vatsal Vora", url: "https://vectorbuilds.dev" }],
+  creator: "Vatsal Vora",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://vectorbuilds.dev",
+    title: "Vatsal Vora | Full-Stack Engineer",
+    description: "Personal Portfolio and Digital Garden of Vatsal Vora. I build products that don't just look good, but actually work when it matters.",
+    siteName: "Vatsal Vora Portfolio",
+    images: [{
+      url: "/images/avatar.png",
+      width: 800,
+      height: 800,
+      alt: "Vatsal Vora Avatar",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vatsal Vora | Full-Stack Engineer",
+    description: "Personal Portfolio and Digital Garden of Vatsal Vora. I build products that don't just look good, but actually work when it matters.",
+    creator: "@vatsal30",
+    images: ["/images/avatar.png"],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
