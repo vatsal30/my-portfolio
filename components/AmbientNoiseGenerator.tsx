@@ -154,7 +154,7 @@ export function AmbientNoiseGenerator() {
 
             <div className="space-y-6">
                 <div>
-                    <label className="text-sm font-medium text-zinc-500 dark:text-zinc-400 mb-3 block">Frequency Profile</label>
+                    <label className="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-3 block">Frequency Profile</label>
                     <div className="grid grid-cols-3 gap-2">
                         <NoiseButton 
                             active={noiseType === "brown"} 

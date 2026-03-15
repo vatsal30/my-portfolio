@@ -44,7 +44,7 @@ export default function MediaGrid({ items, exportName, initialCount = 10, title,
     };
 
     if (!items || !items.length) {
-        return <p className="text-zinc-500">No items found or unable to load.</p>;
+        return <p className="text-zinc-600">No items found or unable to load.</p>;
     }
 
     return (
@@ -72,7 +72,7 @@ export default function MediaGrid({ items, exportName, initialCount = 10, title,
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img src={activeItem.imageUrl} className="w-full h-full object-cover" alt={activeItem.title} />
                                 ) : (
-                                    <div className="w-full h-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-500">No Image</div>
+                                    <div className="w-full h-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600">No Image</div>
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-900 via-transparent to-transparent" />
                             </motion.div>
@@ -80,7 +80,7 @@ export default function MediaGrid({ items, exportName, initialCount = 10, title,
                                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                                     <motion.div layoutId={`text-${activeItem.id}-${activeItem.title}`} className="flex flex-col">
                                         <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 text-balance">{activeItem.title}</h3>
-                                        <p className="text-zinc-500 dark:text-zinc-400 mt-1">{activeItem.subtitle}</p>
+                                        <p className="text-zinc-600 dark:text-zinc-400 mt-1">{activeItem.subtitle}</p>
                                     </motion.div>
                                     {activeItem.duration && (
                                         <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-3 py-1 rounded-full font-mono text-sm shrink-0 w-fit">
@@ -134,14 +134,14 @@ export default function MediaGrid({ items, exportName, initialCount = 10, title,
                                             // eslint-disable-next-line @next/next/no-img-element
                                             <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
                                         ) : (
-                                            <div className="w-full h-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-xs text-zinc-500">No Img</div>
+                                            <div className="w-full h-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-xs text-zinc-600">No Img</div>
                                         )}
                                     </motion.div>
                                     <motion.div layoutId={`text-${item.id}-${item.title}`} className="flex flex-col min-w-0 pr-1 text-left">
                                         <span className="font-bold text-sm text-zinc-900 dark:text-zinc-100 truncate w-full">
                                             {item.title}
                                         </span>
-                                        <span className="text-xs text-zinc-500 dark:text-zinc-400 truncate w-full">{item.subtitle}</span>
+                                        <span className="text-xs text-zinc-600 dark:text-zinc-400 truncate w-full">{item.subtitle}</span>
                                     </motion.div>
                                 </div>
                             </div>

@@ -19,7 +19,7 @@ export function CareerTabs() {
                         onClick={() => setActiveTab(index)}
                         className={`text-left px-4 py-3 md:py-4 transition-all whitespace-nowrap md:whitespace-normal md:-ml-[1px] relative flex flex-col ${activeTab === index
                             ? "text-purple-600 dark:text-purple-400 font-bold bg-purple-50 dark:bg-purple-500/10"
-                            : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900/50"
+                            : "text-zinc-600 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900/50"
                             }`}
                     >
                         {/* Active Border */}
@@ -74,7 +74,7 @@ export function CareerTabs() {
                             </div>
                         </div>
 
-                        <p className="text-sm font-mono tracking-tight text-zinc-500 dark:text-zinc-400 mb-6 flex items-center gap-2">
+                        <p className="text-sm font-mono tracking-tight text-zinc-600 dark:text-zinc-400 mb-6 flex items-center gap-2">
                             {activeItem.date} <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700" /> {activeItem.location}
                         </p>
 

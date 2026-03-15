@@ -35,7 +35,7 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
       <article className="container mx-auto px-4 max-w-3xl pt-24 pb-32">
         <Link
           href="/notes"
-          className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-purple-600 dark:hover:text-purple-500 mb-8 transition-colors group"
+          className="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-purple-600 dark:hover:text-purple-500 mb-8 transition-colors group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to Notes

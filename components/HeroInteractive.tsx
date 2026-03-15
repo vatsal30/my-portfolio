@@ -118,11 +118,12 @@ export function HeroInteractive() {
           }}
         >
           <Image
-            src="/images/avatar.png"
+            src="/images/avatar.jpg"
             alt="Vatsal Vora Profile"
             width={160}
             height={160}
             priority
+            fetchPriority="high"
             className={`object-cover w-full h-full transition-all duration-700 ${auraActive ? 'brightness-110 saturate-150' : 'grayscale hover:grayscale-0'}`}
           />
         </div>

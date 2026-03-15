@@ -56,7 +56,7 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
                         className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-16 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
                     />
                     <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                        <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[10px] font-medium text-zinc-500 dark:text-zinc-400">
+                        <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[10px] font-medium text-zinc-600 dark:text-zinc-400">
                             <span className="text-xs">⌘</span>K
                         </kbd>
                     </div>
@@ -102,7 +102,7 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
                                 <h2 className="text-xl font-bold group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                     {note.title}
                                 </h2>
-                                <time className="text-sm text-zinc-500 font-mono shrink-0">
+                                <time className="text-sm text-zinc-600 font-mono shrink-0">
                                     {note.date}
                                 </time>
                             </div>
@@ -118,7 +118,7 @@ export default function NotesList({ notes }: { notes: NoteMeta[] }) {
                     ))}
                 </div>
             ) : (
-                <div className="py-12 text-center text-zinc-500 dark:text-zinc-400 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl">
+                <div className="py-12 text-center text-zinc-600 dark:text-zinc-400 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl">
                     <Search size={48} className="mx-auto mb-4 opacity-20" />
                     <p className="text-lg font-medium">No notes found</p>
                     <p className="text-sm mt-1">Try adjusting your search or category filter.</p>

@@ -31,11 +31,11 @@ export function ProjectCard({ project }: { project: Project }) {
             {/* Metadata */}
             <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-start justify-between mb-3">
-                    <h4 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{project.title}</h4>
-                    <span className="text-sm font-mono text-zinc-500 dark:text-zinc-400 shrink-0 ml-3">{project.date}</span>
+                    <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{project.title}</h3>
+                    <span className="text-sm font-mono text-zinc-600 dark:text-zinc-400 shrink-0 ml-3">{project.date}</span>
                 </div>
 
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm font-mono leading-relaxed mb-6 flex-1 line-clamp-3">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm font-mono leading-relaxed mb-6 flex-1 line-clamp-3">
                     {project.story || project.description}
                 </p>
 

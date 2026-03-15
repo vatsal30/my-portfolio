@@ -85,6 +85,7 @@ const FloatingDockMobile = ({
                                 >
                                     <Link
                                         href={href}
+                                        aria-label={item.title}
                                         key={item.title}
                                         className={cn("h-10 w-10 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center relative", isActive && "bg-purple-100 dark:bg-purple-900/30 text-purple-600")}
                                     >
@@ -104,6 +105,7 @@ const FloatingDockMobile = ({
             </AnimatePresence>
             <button
                 onClick={() => setOpen(!open)}
+                aria-label="Toggle Navigation Dock"
                 className="h-10 w-10 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center border border-zinc-200 dark:border-zinc-800"
             >
                 <IconLayoutNavbarCollapse className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
@@ -195,7 +197,7 @@ function IconContainer({
     const isActive = pathname === href || (href !== '/' && pathname?.startsWith(href));
 
     return (
-        <Link href={href}>
+        <Link href={href} aria-label={title}>
             <motion.div
                 ref={ref}
                 style={{ width, height }}

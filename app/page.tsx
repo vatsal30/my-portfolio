@@ -53,7 +53,7 @@ export default function Home() {
               Vatsal Vora
             </h1>
             
-            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-xs md:text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-8 px-4 py-2 border border-zinc-200 dark:border-zinc-800 rounded-full bg-zinc-50 dark:bg-zinc-900/50">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-xs md:text-sm font-mono text-zinc-600 dark:text-zinc-400 mb-8 px-4 py-2 border border-zinc-200 dark:border-zinc-800 rounded-full bg-zinc-50 dark:bg-zinc-900/50">
                 <span>/væt.səl/</span>
                 <span className="opacity-50">•</span>
                 <span>noun</span>
@@ -94,12 +94,12 @@ export default function Home() {
             </div>
             
             {/* Mobile-Only Social Links (Moved from Dock) */}
-            <div className="flex items-center justify-center gap-6 mt-10 md:hidden text-zinc-500 dark:text-zinc-400">
-                <a href="https://github.com/vatsal30" target="_blank" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><Github size={20} /></a>
-                <a href="https://linkedin.com/in/vatsal30" target="_blank" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><Linkedin size={20} /></a>
-                <a href="https://x.com/vatsal30" target="_blank" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><FaXTwitter size={20} /></a>
-                <a href="https://www.instagram.com/vatsal._.30/" target="_blank" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><FaInstagram size={20} /></a>
-                <a href="mailto:vatsalds30@gmail.com" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><Mail size={20} /></a>
+            <div className="flex items-center justify-center gap-6 mt-10 md:hidden text-zinc-600 dark:text-zinc-400">
+                <a href="https://github.com/vatsal30" target="_blank" aria-label="GitHub Profile" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><Github size={20} /></a>
+                <a href="https://linkedin.com/in/vatsal30" target="_blank" aria-label="LinkedIn Profile" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><Linkedin size={20} /></a>
+                <a href="https://x.com/vatsal30" target="_blank" aria-label="Twitter/X Profile" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><FaXTwitter size={20} /></a>
+                <a href="https://www.instagram.com/vatsal._.30/" target="_blank" aria-label="Instagram Profile" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><FaInstagram size={20} /></a>
+                <a href="mailto:vatsalds30@gmail.com" aria-label="Send an Email" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><Mail size={20} /></a>
             </div>
 
           </HeroFadeIn>
@@ -123,13 +123,13 @@ export default function Home() {
           <FadeIn>
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
               <div>
-                <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">So Far</span>
+                <span className="text-zinc-600 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">So Far</span>
                 <h2 className="text-4xl md:text-5xl font-bold mt-1 flex items-center gap-4">
                   Career
                 </h2>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-sm text-zinc-500 dark:text-zinc-400 font-medium hidden md:block">Need a copy?</span>
+                <span className="text-sm text-zinc-600 dark:text-zinc-400 font-medium hidden md:block">Need a copy?</span>
                 <a
                   href="/resume.pdf"
                   download="Vatsal_Vora_Resume.pdf"
@@ -148,7 +148,7 @@ export default function Home() {
         <section>
           <FadeIn>
             <div className="flex flex-col mb-4">
-              <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">What people say about me</span>
+              <span className="text-zinc-600 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">What people say about me</span>
               <h2 className="text-4xl md:text-5xl font-bold mt-1">
                 Testimonials
               </h2>

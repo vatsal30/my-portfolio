@@ -86,7 +86,7 @@ export function GitHubCommitsWidget({ username }: { username: string }) {
                 <span className="text-zinc-700 dark:text-zinc-300 font-semibold truncate max-w-[80px] md:max-w-[120px]">
                   {commit.repo.split('/')[1] || commit.repo}:
                 </span>
-                <span className="text-zinc-500 dark:text-zinc-400 truncate pr-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
+                <span className="text-zinc-600 dark:text-zinc-400 truncate pr-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
                   {commit.message}
                 </span>
                 <span className="font-mono text-[10px] md:text-xs shrink-0 whitespace-nowrap">
@@ -95,7 +95,7 @@ export function GitHubCommitsWidget({ username }: { username: string }) {
             </Link>
           ))
         ) : (
-          <p className="text-sm text-zinc-500 text-center py-4 font-sans">No recent commits found.</p>
+          <p className="text-sm text-zinc-600 text-center py-4 font-sans">No recent commits found.</p>
         )}
       </div>
       

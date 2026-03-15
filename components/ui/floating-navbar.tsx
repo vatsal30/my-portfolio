@@ -74,6 +74,7 @@ export const FloatingNav = ({
             <Link
               key={`link-${idx}`}
               href={navItem.link}
+              aria-label={navItem.name}
               className={cn(
                 "relative dark:text-zinc-50 flex items-center space-x-2 text-zinc-600 dark:hover:text-zinc-300 hover:text-zinc-900 transition-colors uppercase tracking-widest text-xs font-mono",
                 isActive ? "text-purple-600 dark:text-purple-400 font-bold" : ""

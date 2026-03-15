@@ -67,7 +67,7 @@ ${featuredProjects.map(repo => `- **${repo.title}**: ${repo.description || "No d
                                 </Link>
                             ))
                         ) : (
-                            <div className="col-span-full py-12 text-center text-zinc-500 dark:text-zinc-400 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl">
+                            <div className="col-span-full py-12 text-center text-zinc-600 dark:text-zinc-400 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl">
                                 Could not load repositories or no repositories found.
                             </div>
                         )}

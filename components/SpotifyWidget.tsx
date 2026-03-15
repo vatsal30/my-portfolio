@@ -69,7 +69,7 @@ export function SpotifyWidget() {
                         <span className="text-[10px] font-bold text-zinc-900 dark:text-zinc-100 truncate leading-tight">
                             {data.title}
                         </span>
-                        <span className="text-[9px] text-zinc-500 dark:text-zinc-400 truncate leading-tight">
+                        <span className="text-[9px] text-zinc-600 dark:text-zinc-400 truncate leading-tight">
                             {data.artist}
                         </span>
                     </div>

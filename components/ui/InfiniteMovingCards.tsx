@@ -117,7 +117,7 @@ const TestimonialCard = ({ item }: { item: Testimonial }) => {
                         <span className="text-sm font-semibold leading-[1.6] text-zinc-900 dark:text-zinc-100">
                             {item.name}
                         </span>
-                        <span className="text-xs font-medium leading-[1.6] text-zinc-500 dark:text-zinc-400">
+                        <span className="text-xs font-medium leading-[1.6] text-zinc-600 dark:text-zinc-400">
                             {item.role} @ {item.company}
                         </span>
                     </span>

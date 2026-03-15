@@ -15,7 +15,7 @@ export default function AboutPage() {
                     <h1 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-zinc-100 tracking-tighter">
                         About Me
                     </h1>
-                    <div className="px-4 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs font-mono text-zinc-500">
+                    <div className="px-4 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs font-mono text-zinc-600">
                         Full-Stack Engineer | Product Architect
                     </div>
                 </div>
@@ -31,7 +31,7 @@ export default function AboutPage() {
                                 className="object-cover group-hover:scale-105 transition-transform duration-700"
                             />
                         </div>
-                        <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400 text-center italic mt-2 w-full">
+                        <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 text-center italic mt-2 w-full">
                             * Me, if I was drawn by Akira Toriyama *
                         </p>
                         
@@ -88,10 +88,10 @@ export default function AboutPage() {
                             </ul>
                         </div>
                         
-                        <div className="pt-8 flex items-center gap-6 text-[11px] font-bold text-zinc-500 font-sans uppercase tracking-[0.2em]">
-                            <a href="https://github.com/vatsal30" className="hover:text-purple-500 transition-colors flex items-center gap-2"><Github size={14}/> GitHub</a>
-                            <a href="https://linkedin.com/in/vatsal30" className="hover:text-purple-500 transition-colors flex items-center gap-2"><Linkedin size={14}/> LinkedIn</a>
-                            <a href="mailto:vatsalds30@gmail.com" className="hover:text-purple-500 transition-colors flex items-center gap-2"><Mail size={14}/> Email</a>
+                        <div className="pt-8 flex items-center gap-6 text-[11px] font-bold text-zinc-600 font-sans uppercase tracking-[0.2em]">
+                            <a href="https://github.com/vatsal30" aria-label="GitHub Profile" className="hover:text-purple-500 transition-colors flex items-center gap-2"><Github size={14}/> GitHub</a>
+                            <a href="https://linkedin.com/in/vatsal30" aria-label="LinkedIn Profile" className="hover:text-purple-500 transition-colors flex items-center gap-2"><Linkedin size={14}/> LinkedIn</a>
+                            <a href="mailto:vatsalds30@gmail.com" aria-label="Send an Email" className="hover:text-purple-500 transition-colors flex items-center gap-2"><Mail size={14}/> Email</a>
                         </div>
                     </div>
                 </div>

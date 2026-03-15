@@ -36,7 +36,7 @@ export function LofiWidget() {
         <button
             onClick={toggleLofi}
             className="flex items-center gap-1.5 transition-colors hover:text-purple-600 dark:hover:text-purple-400 group"
-            aria-label="Toggle Lofi Stream"
+            aria-label="Toggle Lofi Music"
         >
             <span className="font-sans uppercase tracking-widest text-[10px] sm:text-xs">LOFI</span>
             {lofiPlaying ? (

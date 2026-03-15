@@ -25,6 +25,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "react-icons",
+      "@tabler/icons-react",
+      "framer-motion",
+    ],
+  },
 };
 
 export default nextConfig;

@@ -81,7 +81,7 @@ export function PomodoroTimer() {
                         onClick={() => switchMode(m)}
                         className={cn(
                             "relative flex-1 py-2 px-3 text-sm font-semibold rounded-xl transition-all z-10",
-                            mode === m ? "text-white" : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                            mode === m ? "text-white" : "text-zinc-600 hover:text-zinc-900 dark:hover:text-zinc-100"
                         )}
                     >
                         {mode === m && (

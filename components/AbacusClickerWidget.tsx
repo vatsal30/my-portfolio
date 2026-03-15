@@ -97,9 +97,10 @@ export function AbacusClickerWidget() {
                 </motion.div>
 
                 {/* Click Button */}
-                <button
+                <button 
                     onClick={handleClick}
-                    className="px-8 py-3 rounded-2xl bg-purple-500 hover:bg-purple-400 text-white font-bold font-mono tracking-wider transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+                    aria-label="Click to add an Abacus bead"
+                    className="w-full relative h-[48px] bg-zinc-100 dark:bg-zinc-800/80 rounded border border-zinc-200 dark:border-zinc-700/50 overflow-hidden group cursor-crosshair hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
                 >
                     CLICK ME
                 </button>
@@ -113,7 +114,7 @@ export function AbacusClickerWidget() {
                                 initial={{ opacity: 0, y: 5 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -5 }}
-                                className="text-xs sm:text-sm font-mono text-zinc-400 dark:text-zinc-500"
+                                className="text-xs sm:text-sm font-mono text-zinc-400 dark:text-zinc-600"
                             >
                                 you've clicked {userClicks} time{userClicks !== 1 ? 's' : ''}
                             </motion.p>

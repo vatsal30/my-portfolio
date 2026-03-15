@@ -98,7 +98,7 @@ export function TechStack() {
                         >
                             {skillsCategories.map((category) => (
                                 <motion.div variants={itemVariants} key={category.name} className="space-y-4">
-                                    <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 border-b border-zinc-100 dark:border-zinc-800 pb-2 flex items-center gap-2">
+                                    <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600 border-b border-zinc-100 dark:border-zinc-800 pb-2 flex items-center gap-2">
                                         <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
                                         {category.name}
                                     </h3>
@@ -122,7 +122,7 @@ export function TechStack() {
                                                         loading="lazy"
                                                     />
                                                 </div>
-                                                <span className="text-sm font-semibold tracking-tight text-zinc-500 dark:text-zinc-400 group-hover:text-purple-900 dark:group-hover:text-purple-100 transition-colors">
+                                                <span className="text-sm font-semibold tracking-tight text-zinc-600 dark:text-zinc-400 group-hover:text-purple-900 dark:group-hover:text-purple-100 transition-colors">
                                                     {skill.name}
                                                 </span>
                                             </motion.div>
