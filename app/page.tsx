@@ -1,23 +1,22 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import dynamic from "next/dynamic";
+import { ArrowRight, Download, Briefcase, Mail, Github, Linkedin } from "lucide-react";
+import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 
-import { CareerTabs } from "@/components/CareerTabs";
-import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCards";
-import { testimonialsData } from "@/content/testimonials";
-import { featuredProjects } from "@/content/projects";
-import { ArrowRight, Download, Music, Briefcase, Mail, Github, Linkedin } from "lucide-react";
-import { FaXTwitter, FaInstagram, FaDiscord } from "react-icons/fa6";
-import { TechStack } from "@/components/TechStack";
-import FeaturedProjects from "@/components/FeaturedProjects";
-import { LocationWidget } from "@/components/LocationWidget";
-import { GitHubCommitsWidget } from "@/components/GitHubCommitsWidget";
-import { LofiWidget } from "@/components/LofiWidget";
-import { AbacusClickerWidget } from "@/components/AbacusClickerWidget";
 import LLMWrapper from "@/components/LLMWrapper";
+import { HeroInteractive } from "@/components/HeroInteractive";
+import { FadeIn, HeroFadeIn } from "@/components/ui/FadeIn";
+
+const CareerTabs = dynamic(() => import('@/components/CareerTabs').then(mod => mod.CareerTabs));
+const InfiniteMovingCards = dynamic(() => import('@/components/ui/InfiniteMovingCards').then(mod => mod.InfiniteMovingCards));
+const TechStack = dynamic(() => import('@/components/TechStack').then(mod => mod.TechStack));
+const FeaturedProjects = dynamic(() => import('@/components/FeaturedProjects'));
+const LocationWidget = dynamic(() => import('@/components/LocationWidget').then(mod => mod.LocationWidget));
+const GitHubCommitsWidget = dynamic(() => import('@/components/GitHubCommitsWidget').then(mod => mod.GitHubCommitsWidget));
+const AbacusClickerWidget = dynamic(() => import('@/components/AbacusClickerWidget').then(mod => mod.AbacusClickerWidget));
+const LofiWidget = dynamic(() => import('@/components/LofiWidget').then(mod => mod.LofiWidget));
+
+import { testimonialsData } from "@/content/testimonials";
 
 const llmMarkdown = `
 # Vatsal Vora - Full-Stack Engineer | Product Architect
@@ -40,143 +39,14 @@ My engineering background is rooted in distributed systems and performance optim
 `;
 
 export default function Home() {
-  const [auraActive, setAuraActive] = useState(false);
-  const [stars, setStars] = useState<{x: number, y: number, size: number, duration: number, delay: number}[]>([]);
-
-  useEffect(() => {
-    setStars(Array.from({ length: 40 }).map(() => ({
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2 + 1,
-      duration: Math.random() * 3 + 2,
-      delay: Math.random() * 2
-    })));
-  }, []);
-
   return (
     <LLMWrapper llmContent={llmMarkdown}>
-      {/* Dark Mode Page Border Highlight */}
-      {auraActive && (
-        <div className="fixed inset-0 pointer-events-none z-[100] hidden dark:block border-0 md:border-[1px] border-transparent"
-          style={{ animation: 'page-border-glow 6s ease-in-out infinite' }}
-        />
-      )}
-      
-      {/* Dark Mode Stars Background */}
-      {auraActive && (
-        <div className="fixed inset-0 pointer-events-none z-0 hidden dark:block overflow-hidden">
-          {stars.map((star, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-              style={{
-                width: star.size + 'px',
-                height: star.size + 'px',
-                top: star.y + '%',
-                left: star.x + '%',
-                animation: `star-twinkle ${star.duration}s infinite ${star.delay}s`,
-              }}
-            />
-          ))}
-        </div>
-      )}
-
       <div className="container mx-auto px-4 max-w-5xl pt-24 pb-16 space-y-32 relative z-10">
         {/* 1. Hero Section V2 (Minimalist) */}
         <section className="min-h-[70vh] flex flex-col justify-center items-center relative w-full overflow-visible py-20 pb-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative z-10 w-full flex flex-col items-center text-center mt-12 md:mt-0"
-          >
-            {/* Minimal Portrait */}
-            <style>{`
-              @keyframes zen-wave {
-                0% { transform: scale(1); opacity: 0.8; border-color: rgba(168, 85, 247, 0.6); }
-                100% { transform: scale(2.8); opacity: 0; border-color: rgba(168, 85, 247, 0); }
-              }
-              @keyframes ss-portrait-glow {
-                0%, 100% { box-shadow: 0 0 20px 4px rgba(168,85,247,0.4), 0 0 40px 10px rgba(168,85,247,0.25); }
-                50% { box-shadow: 0 0 35px 8px rgba(168,85,247,0.7), 0 0 70px 20px rgba(168,85,247,0.4); }
-              }
-              @keyframes page-border-glow {
-                0%, 100% { box-shadow: inset 0 0 20px rgba(168,85,247,0.2), inset 0 0 40px rgba(168,85,247,0.05); border-color: rgba(168,85,247,0.1); }
-                50% { box-shadow: inset 0 0 40px rgba(168,85,247,0.5), inset 0 0 80px rgba(168,85,247,0.2); border-color: rgba(168,85,247,0.4); }
-              }
-              @keyframes star-twinkle {
-                0%, 100% { opacity: 0.1; transform: scale(0.8); }
-                50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); }
-              }
-            `}</style>
-
-            <div
-              className="relative mb-8 cursor-pointer select-none"
-              onClick={() => setAuraActive(!auraActive)}
-              style={{ width: '160px', height: '160px' }}
-            >
-              {/* ── Aura layers (only when active) ────────────────── */}
-              {auraActive && (<>
-                {/* Zen waves (concentric expanding rings) */}
-                <div style={{
-                  position: 'absolute', inset: '0', borderRadius: '50%',
-                  border: '2px solid rgba(168,85,247,0.8)',
-                  animation: 'zen-wave 3s cubic-bezier(0.0, 0, 0.2, 1) infinite',
-                  zIndex: 1,
-                }} />
-                <div style={{
-                  position: 'absolute', inset: '0', borderRadius: '50%',
-                  border: '2px solid rgba(168,85,247,0.8)',
-                  animation: 'zen-wave 3s cubic-bezier(0.0, 0, 0.2, 1) infinite 1s',
-                  zIndex: 1,
-                }} />
-                <div style={{
-                  position: 'absolute', inset: '0', borderRadius: '50%',
-                  border: '2px solid rgba(168,85,247,0.8)',
-                  animation: 'zen-wave 3s cubic-bezier(0.0, 0, 0.2, 1) infinite 2s',
-                  zIndex: 1,
-                }} />
-                {/* Inner Glow to match waves */}
-                <div style={{
-                  position: 'absolute', inset: '-10px', borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 60%)',
-                  filter: 'blur(10px)',
-                  zIndex: 1,
-                  animation: 'ss-portrait-glow 2s ease-in-out infinite'
-                }} />
-              </>)}
-
-              {/* Hover preview glow (subtle purple, no aura active) */}
-              {!auraActive && (
-                <div className="absolute inset-[-12px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)',
-                    filter: 'blur(12px)',
-                  }}
-                />
-              )}
-
-              {/* Portrait image */}
-              <div
-                className="relative w-full h-full rounded-full overflow-hidden border-4 transition-all duration-500"
-                style={auraActive ? {
-                  borderColor: 'rgba(168,85,247,0.7)',
-                  animation: 'ss-portrait-glow 2s ease-in-out infinite',
-                  zIndex: 10,
-                } : {
-                  borderColor: 'rgba(161,161,170,0.3)',
-                }}
-              >
-                <Image
-                  src="/images/avatar.png"
-                  alt="Vatsal Vora Profile"
-                  width={160}
-                  height={160}
-                  className={`object-cover w-full h-full transition-all duration-700 ${auraActive ? 'brightness-110 saturate-150' : 'grayscale hover:grayscale-0'}`}
-                />
-              </div>
-            </div>
-
+          <HeroFadeIn className="relative z-10 w-full flex flex-col items-center text-center mt-12 md:mt-0">
+            {/* Minimal Portrait with Aura State */}
+            <HeroInteractive />
 
             {/* Phonetic Name & Noun */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white mb-4">
@@ -232,17 +102,12 @@ export default function Home() {
                 <a href="mailto:vatsalds30@gmail.com" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"><Mail size={20} /></a>
             </div>
 
-          </motion.div>
+          </HeroFadeIn>
         </section>
 
         {/* 2. Skills Section */}
         <section>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
+          <FadeIn>
             <div className="mb-10 lg:mb-14">
               <h2 className="text-3xl lg:text-5xl font-bold tracking-tight mb-4">Core Stack</h2>
               <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
@@ -250,17 +115,12 @@ export default function Home() {
               </p>
             </div>
             <TechStack />
-          </motion.div>
+          </FadeIn>
         </section>
 
         {/* 3. Career Section */}
         <section>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
+          <FadeIn>
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
               <div>
                 <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">So Far</span>
@@ -281,17 +141,12 @@ export default function Home() {
             </div>
 
             <CareerTabs />
-          </motion.div>
+          </FadeIn>
         </section>
 
         {/* 4. Testimonials Section */}
         <section>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
+          <FadeIn>
             <div className="flex flex-col mb-4">
               <span className="text-zinc-500 dark:text-zinc-400 font-mono tracking-widest uppercase text-sm">What people say about me</span>
               <h2 className="text-4xl md:text-5xl font-bold mt-1">
@@ -302,17 +157,12 @@ export default function Home() {
             <div className="w-full relative overflow-hidden mt-8 rounded-2xl">
               <InfiniteMovingCards items={testimonialsData} speed="slow" />
             </div>
-          </motion.div>
+          </FadeIn>
         </section>
 
         {/* 5. Projects Preview */}
         <section>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
+          <FadeIn>
             <div className="flex items-end justify-between mb-8">
               <h2 className="text-3xl font-bold">Featured Projects</h2>
               <Link
@@ -331,17 +181,12 @@ export default function Home() {
             >
               View all projects <ArrowRight size={16} />
             </Link>
-          </motion.div>
+          </FadeIn>
         </section>
 
         {/* 6. Widgets Row (Single Line) */}
         <section>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
+          <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-auto md:h-[220px]">
                 <div className="h-full w-full relative md:col-span-1">
                     <LocationWidget />
@@ -353,7 +198,7 @@ export default function Home() {
                     <AbacusClickerWidget />
                 </div>
             </div>
-          </motion.div>
+          </FadeIn>
         </section>
 
       </div>
