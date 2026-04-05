@@ -39,8 +39,7 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
     // Filter notes based on search and tags
     const filteredNotes = useMemo(() => {
         return notes.filter((note) => {
-            const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                (note.excerpt && note.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
+            const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase());
             
             let matchesCategory = true;
             if (activeTag) {
@@ -66,10 +65,10 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
                     <input
                         ref={searchInputRef}
                         type="text"
-                        placeholder={`Search ${basePath === '/articles' ? 'articles' : 'notes'}...`}
+                        placeholder={`Search by title...`}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-[#0a0a0c] dark:bg-[#0a0a0c] border border-zinc-800 focus:border-[#ab75ff]/50 rounded-lg py-3 pl-11 pr-16 focus:outline-none focus:ring-1 focus:ring-[#ab75ff]/50 transition-all text-zinc-100 placeholder:text-zinc-500"
+                        className="w-full bg-zinc-100 dark:bg-[#0a0a0c] border border-zinc-300 dark:border-zinc-800 focus:border-purple-400 dark:focus:border-[#ab75ff]/50 rounded-lg py-3 pl-11 pr-16 focus:outline-none focus:ring-1 focus:ring-purple-400/50 dark:focus:ring-[#ab75ff]/50 transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                     />
                     <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                         <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] font-medium text-zinc-500">
@@ -121,9 +120,11 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
                                         {note.title}
                                     </h2>
                                 </div>
-                                <time className="text-sm text-zinc-500 font-mono shrink-0">
-                                    {note.date}
-                                </time>
+                                {note.date && (
+                                    <time className="text-sm text-zinc-500 font-mono shrink-0">
+                                        {note.date}
+                                    </time>
+                                )}
                             </div>
 
                             <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3 line-clamp-2">

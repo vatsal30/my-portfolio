@@ -1,4 +1,5 @@
 // GitHub API helper
+import matter from "gray-matter";
 
 const GITHUB_USERNAME = "vatsal30";
 const NOTES_REPO = "vatsal30/Obsidian_backup";
@@ -77,6 +78,17 @@ const getHeaders = (isRaw = false) => {
 
 const SKIP_DIRS = new Set(["Private"]);
 
+function extractExcerpt(content: string, maxLength = 200): string {
+  return content
+    .replace(/^#{1,6}\s+.+$/gm, "")       // strip headings
+    .replace(/!\[.*?\]\(.*?\)/g, "")        // strip images
+    .replace(/\[(.+?)\]\(.*?\)/g, "$1")     // links → text only
+    .replace(/[`*_~>|]/g, "")              // strip inline formatting chars
+    .replace(/\n+/g, " ")                   // collapse newlines to spaces
+    .trim()
+    .slice(0, maxLength);
+}
+
 // In-memory cache to avoid redundant API calls during build
 let _notesListCache: NoteMeta[] | null = null;
 
@@ -85,8 +97,9 @@ export async function getNotesList(): Promise<NoteMeta[]> {
 
   try {
     const headers = getHeaders(false);
+    const rawHeaders = getHeaders(true);
 
-    // Fetch the full repo tree in one API call instead of recursive directory listings
+    // 1. Fetch the full repo tree in one API call
     const treeRes = await fetch(
       `https://api.github.com/repos/${NOTES_REPO}/git/trees/HEAD?recursive=1`,
       { headers, next: { revalidate: 3600 } },
@@ -94,9 +107,7 @@ export async function getNotesList(): Promise<NoteMeta[]> {
 
     if (!treeRes.ok) {
       if (treeRes.status === 404) {
-        console.warn(
-          `[GitHub] Repository ${NOTES_REPO} not found or requires GITHUB_TOKEN.`,
-        );
+        console.warn(`[GitHub] Repository ${NOTES_REPO} not found or requires GITHUB_TOKEN.`);
       }
       throw new Error(`Failed to fetch repo tree: ${treeRes.status}`);
     }
@@ -109,33 +120,58 @@ export async function getNotesList(): Promise<NoteMeta[]> {
 
     interface TreeItem { path: string; type: string; }
 
-    const allNotes: NoteMeta[] = (treeData.tree as TreeItem[])
-      .filter((item) => {
-        if (item.type !== "blob" || !item.path.endsWith(".md")) return false;
-        const parts = item.path.split("/");
-        // Skip hidden paths and the Private top-level dir
-        if (parts.some((p) => p.startsWith("."))) return false;
-        if (SKIP_DIRS.has(parts[0])) return false;
-        return true;
-      })
-      .map((item) => {
+    const mdFiles = (treeData.tree as TreeItem[]).filter((item) => {
+      if (item.type !== "blob" || !item.path.endsWith(".md")) return false;
+      const parts = item.path.split("/");
+      if (parts.some((p) => p.startsWith("."))) return false;
+      if (SKIP_DIRS.has(parts[0])) return false;
+      return true;
+    });
+
+    // 2. Fetch all file contents in parallel to extract real frontmatter metadata
+    const notes = await Promise.all(
+      mdFiles.map(async (item): Promise<NoteMeta> => {
         const parts = item.path.split("/");
         const category = parts[0];
-        const fileName = parts[parts.length - 1];
-        const title = fileName.replace(".md", "");
-        return {
-          slug: slugify(title),
-          title,
-          category,
-          date: new Date().toISOString().split("T")[0],
-          excerpt: `Note from ${category}`,
-          path: item.path,
-        };
-      })
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        const fileName = parts[parts.length - 1].replace(".md", "");
+        const slug = slugify(category + "-" + fileName);
 
-    _notesListCache = allNotes;
-    return allNotes;
+        try {
+          const contentRes = await fetch(
+            `https://api.github.com/repos/${NOTES_REPO}/contents/${item.path}`,
+            { headers: rawHeaders, next: { revalidate: 3600 } },
+          );
+          if (!contentRes.ok) throw new Error(`HTTP ${contentRes.status}`);
+
+          const raw = await contentRes.text();
+          const { data, content } = matter(raw);
+
+          return {
+            slug,
+            title: data.title || fileName,
+            category,
+            date: data.date ? new Date(data.date).toISOString().split("T")[0] : "",
+            excerpt: extractExcerpt(content),
+            path: item.path,
+            tags: Array.isArray(data.tags) ? data.tags : undefined,
+          };
+        } catch {
+          // Fall back to filename-derived metadata if fetch fails
+          return { slug, title: fileName, category, date: "", excerpt: "", path: item.path };
+        }
+      }),
+    );
+
+    // Sort: dated notes descending, undated notes alphabetically at the end
+    const sorted = notes.sort((a, b) => {
+      if (!a.date && !b.date) return a.title.localeCompare(b.title);
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+
+    _notesListCache = sorted;
+    return sorted;
   } catch (error) {
     console.error("Error fetching notes:", error);
     return [];
