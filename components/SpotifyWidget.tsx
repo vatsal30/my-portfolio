@@ -26,7 +26,9 @@ export function SpotifyWidget() {
                     const json = await res.json();
                     setData(json);
                 }
-            } catch (e) { }
+            } catch (e) {
+                console.error("Failed to fetch now playing:", e);
+            }
         };
 
         fetchNowPlaying();

@@ -1,8 +1,10 @@
 import { BookOpen } from "lucide-react";
 
-import { getNotesList } from "@/lib/github";
+import { getNotesList, type NoteMeta } from "@/lib/github";
 import LLMWrapper from "@/components/LLMWrapper";
 import NotesList from "@/components/NotesList";
+
+export const revalidate = 3600;
 
 export const metadata = {
     title: "Digital Garden | My Portfolio",
@@ -10,7 +12,12 @@ export const metadata = {
 };
 
 export default async function NotesPage() {
-    const notes = await getNotesList();
+    let notes: NoteMeta[] = [];
+    try {
+        notes = await getNotesList();
+    } catch {
+        // GitHub API unavailable — render empty state gracefully
+    }
 
     const llmMarkdown = `
 # Digital Garden Architecture

@@ -1,7 +1,10 @@
 import { BookOpen } from "lucide-react";
 import { getBlogList } from "@/lib/blog";
+import { type NoteMeta } from "@/lib/github";
 import LLMWrapper from "@/components/LLMWrapper";
 import NotesList from "@/components/NotesList";
+
+export const revalidate = 3600;
 
 export const metadata = {
     title: "Articles | Vatsal Vora",
@@ -9,7 +12,12 @@ export const metadata = {
 };
 
 export default async function ArticlesPage() {
-    const articles = await getBlogList();
+    let articles: NoteMeta[] = [];
+    try {
+        articles = await getBlogList();
+    } catch {
+        // GitHub API unavailable — render empty state gracefully
+    }
 
     const llmMarkdown = `
 # Articles & Deep Dives

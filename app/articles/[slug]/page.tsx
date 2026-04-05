@@ -10,6 +10,9 @@ import ReadingProgress from "@/components/ReadingProgress";
 import CopyCodeButtons from "@/components/CopyCodeButtons";
 import "@/styles/markdown.css";
 
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
     const articles = await getBlogList();
     return articles.map((article) => ({
@@ -17,8 +20,8 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-    const { slug } = await Promise.resolve(params);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
     const content = await getBlogContent(slug);
 
     if (!content) return { title: "Article Not Found" };
@@ -31,8 +34,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
 }
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
-    const { slug } = await Promise.resolve(params);
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
     const rawContent = await getBlogContent(slug);
 
     if (!rawContent) {

@@ -9,7 +9,9 @@ import MarkdownRenderer from "@/components/MarkdownRenderer";
 import CopyCodeButtons from "@/components/CopyCodeButtons";
 import "@/styles/markdown.css";
 
-// Needed for static generation of dynamic routes if doing SSG
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const notes = await getNotesList();
   return notes.map((note) => ({
@@ -18,10 +20,13 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  // Normally you'd fetch the note metadata to get the actual title
   const { slug } = await params;
+  const notes = await getNotesList();
+  const note = notes.find((n) => n.slug === slug);
+  const title = note?.title ?? slug.replace(/-/g, " ");
   return {
-    title: `${slug.replace(/-/g, " ")} | My Portfolio`,
+    title: `${title} | My Portfolio`,
+    description: note?.excerpt,
   };
 }
 

@@ -15,12 +15,21 @@ function ensureDataFile() {
   }
 }
 
+function readCount(): number {
+  try {
+    const raw = fs.readFileSync(DATA_FILE, "utf8");
+    const parsed = JSON.parse(raw);
+    const count = Number(parsed?.count);
+    return Number.isFinite(count) ? count : 0;
+  } catch {
+    return 0;
+  }
+}
+
 export async function GET() {
   try {
     ensureDataFile();
-    const data = fs.readFileSync(DATA_FILE, "utf8");
-    const { count } = JSON.parse(data);
-    return NextResponse.json({ count });
+    return NextResponse.json({ count: readCount() });
   } catch (error) {
     console.error("Error reading abacus data:", error);
     return NextResponse.json({ count: 0 }, { status: 500 });
@@ -30,14 +39,9 @@ export async function GET() {
 export async function POST() {
   try {
     ensureDataFile();
-    const data = fs.readFileSync(DATA_FILE, "utf8");
-    const json = JSON.parse(data);
-
-    json.count = (json.count || 0) + 1;
-
-    fs.writeFileSync(DATA_FILE, JSON.stringify(json, null, 2));
-
-    return NextResponse.json({ count: json.count });
+    const count = readCount() + 1;
+    fs.writeFileSync(DATA_FILE, JSON.stringify({ count }, null, 2));
+    return NextResponse.json({ count });
   } catch (error) {
     console.error("Error updating abacus data:", error);
     return NextResponse.json({ error: "Failed to update" }, { status: 500 });
