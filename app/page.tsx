@@ -6,6 +6,7 @@ import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 import LLMWrapper from "@/components/LLMWrapper";
 import { HeroInteractive } from "@/components/HeroInteractive";
 import { FadeIn, HeroFadeIn } from "@/components/ui/FadeIn";
+import { LiveTimeIST } from "@/components/LiveTimeIST";
 
 const CareerTabs = dynamic(() => import('@/components/CareerTabs').then(mod => mod.CareerTabs));
 const InfiniteMovingCards = dynamic(() => import('@/components/ui/InfiniteMovingCards').then(mod => mod.InfiniteMovingCards));
@@ -58,7 +59,7 @@ export default function Home() {
                 <span className="opacity-50">•</span>
                 <span>noun</span>
                 <span className="opacity-50">•</span>
-                <span suppressHydrationWarning>{new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute:'2-digit', hour12: false })} IST</span>
+                <LiveTimeIST />
                 <span className="opacity-50">•</span>
                 <LofiWidget />
             </div>
