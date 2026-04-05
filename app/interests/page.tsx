@@ -25,8 +25,10 @@ function getGamesData(): MediaItem[] {
         let games: MediaItem[] = [];
 
         // Combine currently playing and completed into one list
+        interface GameData { title: string; platform: string; coverUrl?: string; rating?: number; }
+
         if (data.currentlyPlaying) {
-            games = games.concat(data.currentlyPlaying.map((g: any, i: number) => ({
+            games = games.concat(data.currentlyPlaying.map((g: GameData, i: number) => ({
                 id: `playing-${i}`,
                 title: g.title,
                 subtitle: g.platform,
@@ -36,12 +38,12 @@ function getGamesData(): MediaItem[] {
         }
 
         if (data.recentlyCompleted) {
-            games = games.concat(data.recentlyCompleted.map((g: any, i: number) => ({
+            games = games.concat(data.recentlyCompleted.map((g: GameData, i: number) => ({
                 id: `completed-${i}`,
                 title: g.title,
                 subtitle: g.platform,
                 imageUrl: g.coverUrl,
-                rating: g.rating ? `${g.rating}/10` : "Done" // Provide rating format
+                rating: g.rating ? `${g.rating}/10` : "Done"
             })));
         }
 

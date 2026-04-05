@@ -50,18 +50,28 @@ export async function getAniListCurrentlyWatching(username: string): Promise<Med
     const lists = json.data.MediaListCollection.lists;
     if (!lists || lists.length === 0) return [];
 
+    interface AniListEntry {
+      media: {
+        id: number;
+        title: { romaji: string; english: string | null };
+        coverImage: { large: string };
+        siteUrl: string;
+      };
+      score: number;
+      progress: number;
+      status: string;
+    }
+
     // Flatten all lists (Watching, Completed, Planning) into a single array
-    let allEntries: any[] = [];
+    let allEntries: AniListEntry[] = [];
     for (const list of lists) {
-      // Alternatively, filter for specific lists here: 
-      // if (list.name === "Completed" || list.name === "Watching")
       allEntries = allEntries.concat(list.entries);
     }
 
     // Deduplicate in case a media is in multiple lists
     const uniqueEntries = Array.from(new Map(allEntries.map(e => [e.media.id, e])).values());
 
-    return uniqueEntries.map((entry: any) => ({
+    return uniqueEntries.map((entry) => ({
       id: entry.media.id,
       title: entry.media.title.english || entry.media.title.romaji,
       subtitle: entry.status === "CURRENT" ? "Watching" :

@@ -40,14 +40,7 @@ export const getNowPlaying = async () => {
 };
 
 export const getSpotifyTopTracks = async (): Promise<MediaItem[]> => {
-    if (!refresh_token) {
-        return [
-            { id: 1, title: "Blinding Lights", subtitle: "The Weeknd", url: "https://spotify.com" },
-            { id: 2, title: "Paint The Town Red", subtitle: "Doja Cat", url: "https://spotify.com" },
-            { id: 3, title: "Cruel Summer", subtitle: "Taylor Swift", url: "https://spotify.com" },
-            { id: 4, title: "No Spotify Token", subtitle: "Setup in .env.local", url: "#" },
-        ];
-    }
+    if (!refresh_token) return [];
 
     try {
         const { access_token } = await getAccessToken();
@@ -62,14 +55,24 @@ export const getSpotifyTopTracks = async (): Promise<MediaItem[]> => {
 
         if (!data.items) return [];
 
-        return data.items.map((track: any) => {
+        interface SpotifyTrack {
+            id: string;
+            name: string;
+            duration_ms: number;
+            artists: { name: string }[];
+            album: { images: { url: string }[] };
+            external_urls: { spotify: string };
+            popularity: number;
+        }
+
+        return data.items.map((track: SpotifyTrack) => {
             const min = Math.floor(track.duration_ms / 60000);
             const sec = ((track.duration_ms % 60000) / 1000).toFixed(0);
 
             return {
                 id: track.id,
                 title: track.name,
-                subtitle: track.artists.map((_artist: any) => _artist.name).join(', '),
+                subtitle: track.artists.map((_artist) => _artist.name).join(', '),
                 url: track.external_urls.spotify,
                 imageUrl: track.album.images?.[0]?.url,
                 duration: `${min}:${Number(sec) < 10 ? '0' : ''}${sec}`,

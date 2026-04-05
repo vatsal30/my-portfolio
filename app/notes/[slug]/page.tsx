@@ -6,6 +6,7 @@ import { getNoteContent, getNotesList } from "@/lib/github";
 import matter from "gray-matter";
 import LLMWrapper from "@/components/LLMWrapper";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { MarkdownErrorBoundary } from "@/components/MarkdownErrorBoundary";
 import CopyCodeButtons from "@/components/CopyCodeButtons";
 import "@/styles/markdown.css";
 
@@ -59,7 +60,9 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
 
         <div className="prose prose-zinc dark:prose-invert max-w-none">
           <CopyCodeButtons />
-          <MarkdownRenderer content={content} />
+          <MarkdownErrorBoundary>
+            <MarkdownRenderer content={content} />
+          </MarkdownErrorBoundary>
         </div>
       </article>
     </LLMWrapper>

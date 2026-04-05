@@ -75,90 +75,67 @@ const getHeaders = (isRaw = false) => {
   return headers;
 };
 
+const SKIP_DIRS = new Set(["Private"]);
+
 // In-memory cache to avoid redundant API calls during build
 let _notesListCache: NoteMeta[] | null = null;
 
 export async function getNotesList(): Promise<NoteMeta[]> {
-  // Return cached result if available (avoids re-fetching for every note page during build)
   if (_notesListCache) return _notesListCache;
 
   try {
     const headers = getHeaders(false);
 
-    // 1. Fetch root contents
-    const rootRes = await fetch(
-      `https://api.github.com/repos/${NOTES_REPO}/contents`,
+    // Fetch the full repo tree in one API call instead of recursive directory listings
+    const treeRes = await fetch(
+      `https://api.github.com/repos/${NOTES_REPO}/git/trees/HEAD?recursive=1`,
       { headers, next: { revalidate: 3600 } },
     );
-    if (!rootRes.ok) {
-      if (rootRes.status === 404) {
+
+    if (!treeRes.ok) {
+      if (treeRes.status === 404) {
         console.warn(
           `[GitHub] Repository ${NOTES_REPO} not found or requires GITHUB_TOKEN.`,
         );
       }
-      throw new Error("Failed to fetch root contents");
-    }
-    const rootItems = await rootRes.json();
-
-    // 2. Filter for top-level directories (skip hidden and Private)
-    const SKIP_DIRS = new Set(["Private"]);
-    const topLevelDirs = rootItems.filter(
-      (item: any) =>
-        item.type === "dir" &&
-        !item.name.startsWith(".") &&
-        !SKIP_DIRS.has(item.name),
-    );
-
-    // 3. Recursively fetch all .md files from a directory path
-    const fetchNotesFromDir = async (
-      dirPath: string,
-      category: string, // Always the top-level dir name
-    ): Promise<NoteMeta[]> => {
-      const res = await fetch(
-        `https://api.github.com/repos/${NOTES_REPO}/contents/${dirPath}`,
-        { headers, next: { revalidate: 3600 } },
-      );
-      if (!res.ok) return [];
-
-      const items = await res.json();
-      let notes: NoteMeta[] = [];
-
-      for (const item of items) {
-        if (item.type === "file" && item.name.endsWith(".md")) {
-          const title = item.name.replace(".md", "");
-          notes.push({
-            slug: slugify(title),
-            title,
-            category,
-            date: new Date().toISOString().split("T")[0],
-            excerpt: `Note from ${category}`,
-            path: item.path,
-          });
-        } else if (item.type === "dir" && !item.name.startsWith(".")) {
-          // Recurse into subdirectory, keeping the top-level category
-          const subNotes = await fetchNotesFromDir(item.path, category);
-          notes = [...notes, ...subNotes];
-        }
-      }
-
-      return notes;
-    };
-
-    // 4. Gather notes from all top-level dirs (recursively)
-    let allNotes: NoteMeta[] = [];
-    for (const dir of topLevelDirs) {
-      const notes = await fetchNotesFromDir(dir.path, dir.name);
-      allNotes = [...allNotes, ...notes];
+      throw new Error(`Failed to fetch repo tree: ${treeRes.status}`);
     }
 
-    // 5. Sort by date descending
-    const sorted = allNotes.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    );
+    const treeData = await treeRes.json();
 
-    // Cache the result
-    _notesListCache = sorted;
-    return sorted;
+    if (treeData.truncated) {
+      console.warn("[GitHub] Repo tree was truncated — vault exceeds 100,000 items.");
+    }
+
+    interface TreeItem { path: string; type: string; }
+
+    const allNotes: NoteMeta[] = (treeData.tree as TreeItem[])
+      .filter((item) => {
+        if (item.type !== "blob" || !item.path.endsWith(".md")) return false;
+        const parts = item.path.split("/");
+        // Skip hidden paths and the Private top-level dir
+        if (parts.some((p) => p.startsWith("."))) return false;
+        if (SKIP_DIRS.has(parts[0])) return false;
+        return true;
+      })
+      .map((item) => {
+        const parts = item.path.split("/");
+        const category = parts[0];
+        const fileName = parts[parts.length - 1];
+        const title = fileName.replace(".md", "");
+        return {
+          slug: slugify(title),
+          title,
+          category,
+          date: new Date().toISOString().split("T")[0],
+          excerpt: `Note from ${category}`,
+          path: item.path,
+        };
+      })
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    _notesListCache = allNotes;
+    return allNotes;
   } catch (error) {
     console.error("Error fetching notes:", error);
     return [];
