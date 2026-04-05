@@ -125,6 +125,7 @@ export async function getNotesList(): Promise<NoteMeta[]> {
       const parts = item.path.split("/");
       if (parts.some((p) => p.startsWith("."))) return false;
       if (SKIP_DIRS.has(parts[0])) return false;
+      if (parts[parts.length - 1].toUpperCase() === "CLAUDE.md") return false;
       return true;
     });
 
