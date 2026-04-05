@@ -23,34 +23,18 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
 
-    // Extract unique tags/categories
-    const filterTags = useMemo(() => {
-        const tags = new Set<string>();
-        notes.forEach(note => {
-            if (note.tags && note.tags.length > 0) {
-                note.tags.forEach(tag => tags.add(tag));
-            } else if (note.category) {
-                tags.add(note.category);
-            }
-        });
-        return Array.from(tags).sort();
+    // Extract unique top-level folder names for filter buttons
+    const filterCategories = useMemo(() => {
+        return Array.from(new Set(notes.map(note => note.category))).sort();
     }, [notes]);
 
-    // Filter notes based on search and tags
+    // Filter notes based on search (title + tags) and active category
     const filteredNotes = useMemo(() => {
         return notes.filter((note) => {
-            const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                (note.excerpt && note.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
-            
-            let matchesCategory = true;
-            if (activeTag) {
-                if (note.tags && note.tags.length > 0) {
-                    matchesCategory = note.tags.includes(activeTag);
-                } else {
-                    matchesCategory = note.category === activeTag;
-                }
-            }
-            
+            const q = searchQuery.toLowerCase();
+            const matchesSearch = note.title.toLowerCase().includes(q) ||
+                (note.tags?.some(t => t.toLowerCase().includes(q)) ?? false);
+            const matchesCategory = !activeTag || note.category === activeTag;
             return matchesSearch && matchesCategory;
         });
     }, [notes, searchQuery, activeTag]);
@@ -66,10 +50,10 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
                     <input
                         ref={searchInputRef}
                         type="text"
-                        placeholder={`Search ${basePath === '/articles' ? 'articles' : 'notes'}...`}
+                        placeholder={`Search by title...`}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-[#0a0a0c] dark:bg-[#0a0a0c] border border-zinc-800 focus:border-[#ab75ff]/50 rounded-lg py-3 pl-11 pr-16 focus:outline-none focus:ring-1 focus:ring-[#ab75ff]/50 transition-all text-zinc-100 placeholder:text-zinc-500"
+                        className="w-full bg-zinc-100 dark:bg-[#0a0a0c] border border-zinc-300 dark:border-zinc-800 focus:border-purple-400 dark:focus:border-[#ab75ff]/50 rounded-lg py-3 pl-11 pr-16 focus:outline-none focus:ring-1 focus:ring-purple-400/50 dark:focus:ring-[#ab75ff]/50 transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                     />
                     <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                         <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] font-medium text-zinc-500">
@@ -78,7 +62,7 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
                     </div>
                 </div>
 
-                {filterTags.length > 0 && (
+                {filterCategories.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                         <button
                             onClick={() => setActiveTag(null)}
@@ -89,16 +73,16 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
                         >
                             All
                         </button>
-                        {filterTags.map(tag => (
+                        {filterCategories.map(category => (
                             <button
-                                key={tag}
-                                onClick={() => setActiveTag(tag)}
-                                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${activeTag === tag
+                                key={category}
+                                onClick={() => setActiveTag(category)}
+                                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${activeTag === category
                                         ? "bg-[#bf8bfa] text-white"
                                         : "bg-purple-950/30 border border-purple-900/50 text-purple-200 hover:bg-purple-900/50"
                                     }`}
                             >
-                                {tag}
+                                {category}
                             </button>
                         ))}
                     </div>
@@ -121,9 +105,11 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
                                         {note.title}
                                     </h2>
                                 </div>
-                                <time className="text-sm text-zinc-500 font-mono shrink-0">
-                                    {note.date}
-                                </time>
+                                {note.date && (
+                                    <time className="text-sm text-zinc-500 font-mono shrink-0">
+                                        {note.date}
+                                    </time>
+                                )}
                             </div>
 
                             <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3 line-clamp-2">
@@ -131,11 +117,9 @@ export default function NotesList({ notes, basePath = "/notes" }: { notes: NoteM
                             </p>
 
                             <div className="flex gap-2">
-                                {(note.tags && note.tags.length > 0 ? note.tags : [note.category]).map(tag => (
-                                    <span key={tag} className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-400">
-                                        {tag}
-                                    </span>
-                                ))}
+                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-400">
+                                    {note.category}
+                                </span>
                             </div>
                         </Link>
                     ))}

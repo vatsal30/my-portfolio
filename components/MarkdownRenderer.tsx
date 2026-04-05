@@ -1,10 +1,9 @@
-"use client";
-
 import ReactMarkdown from "react-markdown";
 import { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
+import { CodeBlockWithCopy } from "./CodeBlockWithCopy";
 
 interface MarkdownRendererProps {
     content: string;
@@ -12,6 +11,9 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     const components: Components = {
+        pre: ({ node: _node, children, ...props }) => (
+            <CodeBlockWithCopy {...props}>{children}</CodeBlockWithCopy>
+        ),
         h1: ({ ...props }) => <h1 className="text-3xl md:text-4xl font-bold mt-8 mb-4 tracking-tight" {...props} />,
         h2: ({ ...props }) => <h2 className="text-2xl md:text-3xl font-bold mt-8 mb-4 tracking-tight border-b border-zinc-200 dark:border-zinc-800 pb-2" {...props} />,
         h3: ({ ...props }) => <h3 className="text-xl md:text-2xl font-bold mt-6 mb-3" {...props} />,
